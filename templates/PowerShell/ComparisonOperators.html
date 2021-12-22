@@ -1,0 +1,100 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 6 %}
+
+{% block title %} Comparison {% endblock %}
+
+{% block activecrumb %} Comparison {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Fundamentals</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Comparison Operators</h1>
+            <h2 class="text-center my-4">What is a comparison operator?</h2>
+            <p>
+                In addition to mathematical operators, PowerShell also has comparison operators. Comparison operators
+                are used to compare two different values or objects to check for things like equality and patterns. 
+                PowerShell provides 4 types of comparison operators, these are equality, matching, containment, 
+                replacement, and type. For now, we are just going to cover the ones concerning equality.
+            </p>
+            <h2 class="text-center my-4">Equality Operators</h2>
+            <div class="posh-op-table">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Syntax</th>
+                        </tr>
+                    </thead>
+                    <tr scope="row">
+                        <td>-GT</td>
+                        <td>Greater than</td>
+                    </tr>
+                    <tr scope="row">
+                        <td>-LT</td>
+                        <td>Less than</td>
+                    </tr>
+                    <tr scope="row">
+                        <td>-EQ</td>
+                        <td>Equal to</td>
+                    </tr>
+                    <tr scope="row">
+                        <td>-GE</td>
+                        <td>Greater than or equal to</td>
+                    </tr>
+                    <tr scope="row">
+                        <td>-LE</td>
+                        <td>Less than or equal to</td>
+                    </tr>
+                    <tr scope="row">
+                        <td>-NE</td>
+                        <td>Not equal to</td>
+                    </tr>
+                </table>
+            </div>
+            <p>
+                This is one of the things in PowerShell if you're coming from a programming background that might
+                be a little bit hard to adjust to. Normally, these operators are represented with their mathematical
+                symbols, but in PowerShell they look more like switches for command line utilities. They do in fact
+                work this way when filtering objects in cmdlets like Get-ADUser, in case you were wondering why
+                Microsoft would think this was a good idea. This is the first example we are going to encounter
+                where Microsoft deviates from a convention most programming languages use in order to be easier to
+                use as a shell language.
+            </p>
+            <h2 class="text-center my-4">Demonstrations</h2>
+            <p>
+                Below I have examples of these operators and how they work in the shell. They return true if the condition is true and false if it is 
+                false.
+            </p>
+            <h5 class="text-center my-4">Greater than</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshComparisonOps/Demo-GT.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Less than</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshComparisonOps/Demo-LT.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Equal to</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshComparisonOps/Demo-EQ.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Greater than or equal to</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshComparisonOps/Demo-GE.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Less than or equal to</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshComparisonOps/Demo-LE.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Not equal to</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshComparisonOps/Demo-NE.png') }}"></image><br>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

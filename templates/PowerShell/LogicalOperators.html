@@ -1,0 +1,105 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 9 %}
+
+{% block title %} Logical Operators {% endblock %}
+{% block activecrumb %} Logical Operators {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Fundamentals</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Logical Operators</h1>
+            <h2 class="text-center my-4">What is a logical operator?</h2>
+            <p>
+                We have now arrived at one of my favorite topics and that is logical operators. This is not
+                because logical operators in and of themselves are exciting, but I really enjoy logic as an
+                academic subject. Logical operators evaluate the logic of a statement, that is whether or not
+                the conditions of a statement are true.
+            </p>
+            <h2 class="text-center my-4">Logical Operators</h2>
+            <div class="posh-op-table">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Syntax</th>
+                        </tr>
+                    </thead>
+                    <tr scope="row">
+                        <td>-and</td>
+                        <td>Logical AND</td>
+                    </tr>
+                    <tr scope="row">
+                        <td>-or</td>
+                        <td>Logical OR</td>
+                    </tr>
+                    <tr scope="row">
+                        <td>-xor</td>
+                        <td>Logical Exclusive OR</td>
+                    </tr>
+                    <tr scope="row">
+                        <td>-not</td>
+                        <td>Logical NOT</td>
+                    </tr>
+                    <tr scope="row">
+                        <td>!</td>
+                        <td>Logical NOT</td>
+                    </tr>
+                </table>
+            </div>
+            <p>
+                With the exception of !, these operators are kind of like the comparison operators we encountered before in that the syntax used to
+                represent them is very different from that of most C-family programming languages and Python. In this case, we are also trading
+                a programming convention for convenience in the shell console.
+            </p>
+            <h2 class="text-center my-4">Demonstrations</h2>
+            <p>
+                Below I have examples of these operators and how they work in the shell console. They return true if the condition is true and false 
+                if it is false.
+            </p>
+            <h5 class="text-center my-4">And (-and)</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshLogicalOps/Demo-And.png') }}"></image><br>
+            </div>
+            <p>
+                And will return true when condition 1 is true and condition 2 is true, but will return false when either condition is false
+                or if both conditions are false.
+            </p>
+            <h5 class="text-center my-4">Inclusive Or (-or)</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshLogicalOps/Demo-Or.png') }}"></image><br>
+            </div>
+            <p>
+                Or works a little bit differently in logic than it does in regular English conversation. When English speakers use the word
+                "or" in common usage, they typically mean exclusive or and not inclusive or. However, in logic the opposite is true - when
+                a logician uses the word "or" they mean inclusive or. With inclusive or, as long as one of the conditions is true, the 
+                expression will evaluate to true. If both of the conditions are false, the expression will evaluate to false. This means that 
+                if both conditions are true with inclusive or, the expression is true.
+            </p>
+            <h5 class="text-center my-4">Exclusive Or (-xor)</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshLogicalOps/Demo-Xor.png') }}"></image><br>
+            </div>
+            <p>
+                With Exclusive or if either of the conditions is true, the expression is true, but if both of the conditions are true 
+                or if both of the conditions are false, the expression will be false.
+            </p>
+            <h5 class="text-center my-4">Not (-not/!)</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshLogicalOps/Demo-Not.png') }}"></image><br>
+            </div>
+            <p>
+                Not returns true when a condition is false and false when a condition is true. The syntax for this operator is both -not
+                and !. Above, I demonstrate using -not with the -and operator. Below I demonstrate using ! with the -or operator.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshLogicalOps/Demo-Not2.png') }}"></image><br>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

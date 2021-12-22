@@ -1,0 +1,67 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 23 %}
+
+{% block title %} Print-Files1 {% endblock %}
+
+{% block activecrumb %} Print-Files1 {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Making Reusable Code</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Code Example - Print-Files</h1>
+            <p>
+                This is the first code example in a series of lessons on making your code more reusable. If you have been following along, you now
+                have enough knowledge to start building tools that will solve real world problems. I am going to walk you through developing a script
+                to demonstrate how to apply the concepts from the previous lesson.
+            </p>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Functions:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">Developing a script</h2>
+            <p>
+                I have a friend who was trying to write a script with VBScript that would allow him to print files in a folder in alphebetical order.
+                He needed it to be finished in 24 hours and was unable to get it to work. I told him I could do it, but would prefer to do it in
+                PowerShell. Since I was starting from scratch and only had a small timeframe to create something that worked, and also had the added
+                challenge of not actually owning a printer, I hacked together the following:
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshPrintFiles1/Print-PdfFiles.png') }}"></image><br>
+            </div>
+            <p>
+                This is a fully functional script that prints all the files in a specific directory with the extension pdf. It relies on two conditions:
+                1) Adobe Reader is your default pdf application (others might work but are untested) and 2) your default printer is not a pdf printer or
+                other print-to-file printer.
+            </p>
+            <p>
+                This first obvious improvement we can do to this script is to allow us to change the target directory. My friend had suggested that having
+                it print files in the same directory the script is in would be a nice feature. He also was quick to point out the obvious trade-off would be
+                that you would have to copy the script to that location first. I think it's a good idea, but that we should also allow the script to accept
+                user input to change the path when it is running. We can achieve this with the Read-Host cmdlet.
+            </p>
+            <p>
+                A second, maybe less obvious improvement is that we might be able to use this script with different file types. We're using the start-process
+                cmdlet and all I've tested is that it works with pdf files when Adobe Reader is your default pdf application. This script might work with other
+                file extensions and other applications without modification and it would be cool if other people could figure that out as they needed to. We
+                can also make this happen with the Read-Host cmdlet to accept user input for this parameter.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshPrintFiles1/Print-FilesRH.png') }}"></image><br>
+            </div>
+            <p>
+                Using the Read-Host cmdlet to accept the file path actually works with relative paths as well as with absolute paths. I didn't expect this to
+                be the case, but it's very serendipitous and the kind of thing that makes PowerShell fun to work with for small routine tasks.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

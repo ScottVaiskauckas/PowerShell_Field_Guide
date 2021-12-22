@@ -1,0 +1,121 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 31 %}
+
+{% block title %} Persistance {% endblock %}
+
+{% block activecrumb %} Persistance {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Solving Problems</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Storing data in text files</h1>
+            <p>
+                This is the second lesson in a series of lessons on how you can save data so you can use it later with PowerShell.             
+            </p>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Peristance:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">Txt files</h2>
+            <p>
+                Txt files are a great way to store data for later use. Anyone from a Linux background should be used to doing this, but it
+                might be new for Windows admins. I first am going to explain the ways this was done with cmd.exe since these are still supported
+                in PowerShell. I am then going to cover how to do the same operations with PowerShell cmdlets.
+            </p>
+            <h2> &gt;, &gt;&gt;, and &lt; </h2>
+            <p>
+                If you're coming to these lessons from a Linux or Windows administration background, you're probably familiar with the redirection
+                operators. &gt; lets you redirect stdout to a file and will create the file if it doesn't exist and will overwrite the data in that
+                file. &gt;&gt; redirects stdout and appends it to the end of a file. &lt; is used to read from files. In reality it gets a bit more
+                complicated than this, but I wanted to cover these ideas briefly first since you can still use them in PowerShell. These still exist
+                in PowerShell and can be useful for logging information, but there are more options now. Back in the day, these were your only options.
+            </p>
+            <h2>Out-File</h2>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshTxt/Out-File.png') }}"></image><br>
+            </div>
+            <p>
+                The Out-File cmdlet will write whatever you pipe into it to a file. This is the standard way to do this in PowerShell. In this example,
+                I use it to write the text "String" to a text file named .\Out-File.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshTxt/Out-File-Notepad.png') }}"></image><br>
+            </div>
+            <h2>Add-Content</h2>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshTxt/Add-Content.png') }}"></image><br>
+            </div>
+            <p>
+                The Add-Content cmdlet will let you append text to the end of a text file. In this example, I append the word "String2" to the end of
+                of the file.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshTxt/Add-Content-Notepad.png') }}"></image><br>
+            </div>
+            <h2>Get-Content</h2>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshTxt/Get-Content.png') }}"></image><br>
+            </div>
+            <p>
+                The Get-Content command will display the contents of a text file in the shell. You can also use this to store the contents in an array
+                of strings. The array items will be separated by the line endings.
+            </p>
+            <h5 class="text-center my-4">Write-DateToTxt</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshTxt/Write-DateToTxt.png') }}"></image><br>
+            </div>
+            <p>
+                The first script we have here is one named Write-DateToTxt and it might be surprising, but it will write the current date to a txt file.
+                Lines 3-7 create named parameters with default values. Lines 9-13 make sure the target directory exist. Lines 16-17 Get the date (Get-Date
+                cmdlet) and write it to a file at the target path.
+            </p>
+            <h5 class="text-center my-4">Console</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshTxt/Write-DateToTxt-Result.png') }}"></image><br>
+            </div>
+            <p>
+                Above you can see the output in the console from running the script. I open the file created with notepad and see it has the current date
+                (below).
+            </p>
+            <h5 class="text-center my-4">Txt file</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshTxt/Write-DateToTxt-Notepad.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">What can we do with it?</h5>
+            <p>
+                PowerShell has a very useful cmdlet named Get-Member. Get-Member will display information about an object including its type,
+                properties, and methods. Let's pipe the data from our text file into Get-Member.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshTxt/Write-DateToTxt-GetMember.png') }}"></image><br>
+            </div>
+            <p>
+                This is kind of an eyeful, but if you look at this long enough, you will probably realize that we're just dealing with the methods
+                available for strings. You can get pretty far storing data this way and writing scripts to process and format it for later consumption,
+                but it can be time consuming in some cases. A better approach is to store PowerShell objects in a way that still represents the objects
+                so we can retrieve them later. PowerShell provides cmdlets that make doing this with csv and xml files very pain-free. I will be covering
+                how to do this next.
+            </p>
+            <h5 class="text-center my-4">Export-AdminsToTxt</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshTxt/Export-AdminsToTxt.png') }}"></image><br>
+            </div>
+            <p>
+                Here's a script that will get the members of the administrators on a target machine and write the output to a text file. I am including
+                this as a bonus for reading my stuff. I am not going to be running it for you because I don't want to spend the time it would take to make
+                sure I'm not sharing any information I shouldn't be. You must run this script as an administrator for it to work. You could use it to audit
+                the administrators on some Windows clients in an organization.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

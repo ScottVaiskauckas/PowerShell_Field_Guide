@@ -1,0 +1,79 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+
+{% block title %} User Interfaces {% endblock %}
+
+{% block activecrumb %} User Interfaces {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">PowerShell - User Interfaces</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Separating our User Interface with Functions</h1>
+            <p>
+                In this lesson we are going to learn how to keep our code nice and clean by seprating our code related to
+                creating our UI from the rest of our code.
+            </p>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using a file named PowerShellUIs.ps1. This is a PowerShell script that contains
+                our example code. It is not required that you use this file to follow along, but I think it will be helpful.
+                You can find this file in the following github repo in a folder named examples:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-3">What's the point?</h2>
+            <p>
+                Why would I want to separate my UI code from the rest of my code? The main reason this is done in programming is to make your
+                code easier to maintain and debug. If you know that all of the code related to one thing your program does is all in the
+                same area, you know where to look when something breaks. In programming, these areas are called layers and in this case we are
+                talking about the presentation layer.
+            </p>
+            <p>
+                Another reason for separating your UIs from the rest of your code is for a consistent experience. It is often possible to
+                reuse the same function for presenting the output to the end user. This guarantees that the output has a similar feel each
+                time it is generated. This may not matter much if you only have one person writing scripts, but if multiple people are
+                involved it will make things feel more unified.
+            </p>
+            <p>
+                Wait a minute, PowerShell has a UI? Yeah, it does. When you're writing console programs the UI is the console. Just because
+                it is text-based does not mean it is not a UI and that principles of good UI/UX design don't apply. If you have never used
+                any legacy *nix programs, this may be a radical concept for you, but having suffered through some bad terminal app UI design 
+                choices myself, I think this is an often neglected area by administrators.
+            </p>
+            <h2 class="text-center my-3">DisplayCollection()</h2>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="img-fluid center-block" src="{{ url_for('static', filename='images/PowerShell/PoshArraylists/PoshArraylists-Example4.png') }}"></image>
+            </div>
+            <p>
+                So far, we have been handling creating our UIs by returning values from functions and passing them into a parameter of the
+                Write-Host cmdlet. Consider Example4 from our Arraylist lesson. We can take all of the code related to creating the UI (lines 73-80)
+                and place it inside of a function named DisplayCollection(). I have taken a few additional steps to refactor the code so it
+                displays the collection type and iterates through all of the elements in the collection instead of just printing the first element.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="img-fluid center-block" src="{{ url_for('static', filename='images/PowerShell/PoshUI/PoshUI.png') }}"></image>
+            </div>
+            <p>
+                Now whenever we need to generate a UI for our future demonstrations revolving around arrays and arraylists, we can just use this
+                function. To demonstrate, let's create an array on line 22 and an arraylist on lines 25 and 26 and pass them into our 
+                DisplayCollection() function. See below for the output:
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="img-fluid center-block" src="{{ url_for('static', filename='images/PowerShell/PoshUI/PoshUI-Output.png') }}"></image>
+            </div>
+            <p>                
+                Before ending this really brief lesson, I wanted to add that this would be considered by most to be the bare minimum as
+                far as separating your UI from the rest of your code is concerned. In really simple scripts it might be okay to just have a couple
+                of functions related to generating your UI, but it is a much better idea to have all of this code in a separate file. I hope
+                I haven't left you with more questions than answers by leaving you with this information, but if I have, I think they will be
+                answered when I cover my thoughts on how to package PowerShell scripts and modules.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

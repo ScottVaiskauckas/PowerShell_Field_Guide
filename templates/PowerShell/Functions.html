@@ -1,0 +1,131 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 28 %}
+
+{% block title %} Functions {% endblock %}
+
+{% block activecrumb %} Functions {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Making Reusable Code</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Making your code reusable </h1>
+            <p>
+                This is the first lesson in a series of lessons on making your code more reusable.
+            </p>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Collections:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">What is a function?</h2>
+            <p>
+                Much like variables, if you've ever learned algebra you may have an idea of what a mathematical function is. According
+                to <a href="https://mathworld.wolfram.com/Function.html">Wolfram:</a> "A function is a relation that uniquely 
+                associates members of one set with members of another set." I think a reasonable translation of that is a function 
+                takes a set of inputs and produces a set of outputs where each input is associated with only one output. You may 
+                remember F(x)=mx+b as the slope-intercept form of a linear function. When you input a number into x, you would always 
+                get the same result or output. Functions work the same way in programming.
+            </p>
+            <p>
+                Functions are another way to make your code reusable. You can wrap a portion of PowerShell code inside of a function. 
+                You can then use this code anywhere in your script by using the function name. This is called calling the function. I 
+                think I've used some of this terminology before now, but I don't think I had provided a formal definition yet.
+            </p>
+            <h2 class="text-center my-4">Syntax</h2>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshFunctions/Functions-Syntax.png') }}"></image><br>
+            </div>
+            <!-- TODO: Syntax and Alternative syntax images -->
+            <p>
+                Functions at a minimum consist of the function keyword, the name of the function, and curly braces surrounding the statements
+                PowerShell will execute when the function is called. PowerShell functions can also accept positional parameters and named
+                parameters. PowerShell functions support two different syntaxes for parameters. The first, recommend syntax is to use the
+                param statement. The alternative syntax is similar to other programming languages - you define the parameters before the first
+                curly brace. I have never seen this syntax outside of Microsoft's documentation and do not use it myself.
+            </p>
+            <h2 class="text-center my-4">Return Keyword</h2>
+            <p>
+                In PowerShell, the return keyword exits a function, script, or script block. Unlike break statements, the return keyword
+                will return a specific value if followed by a value or an expression. We use the return keyword with functions to use the output
+                of a function in some way in our script. If this seems a bit abstract, I think it will make more sense once I cover some examples.
+            </p>
+            <h5 class="text-center my-4">Example 1</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshFunctions/Functions-Example1.png') }}"></image><br>
+            </div>
+            <p>
+                In our first example, we create a HelloUser function. This is kind of a variation on a hello world app. The function is defined on 
+                lines 1-8. Note that we start with the Function keyword, followed by the name of the function, then two curly braces. This function 
+                accepts two parameters, one named $FistName and one named $LastName. These are not required parameters, so the function can be called
+                with or without them. We call the function on line 10 and pass in the arguments "John" and "Doe" for our parameters. We can run this
+                script in the PowerShell console and see "Hello John Doe!" written to the console window.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshFunctions/Functions-Example1-Result.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Example 2</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshFunctions/Functions-Example2.png') }}"></image><br>
+            </div>
+            <p>
+                Next we have an example that demonstrates using the Return statement. Here we get the timezone of our computer with the cmdlet 
+                Get-TimeZone and store the output in a variable named $Timezone. We then return the variable $Timezone on line 5. When we call
+                our function, it executes the code, then returns the value stored in $Timezone.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshFunctions/Functions-Example2-Result.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Example 3</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshFunctions/Functions-Example3.png') }}"></image><br>
+            </div>
+            <p>
+                In example three, we have three variables, $Timezone, $String, and $Int. Our function ends with three lines of code where we have just
+                these variables. What do you think will happen? If you're coming from another programming language you may be surprised to learn PowerShell
+                returns all three values as elements of an object array. On line 12 we assign the output of the NoReturnStatement() function to a variable
+                named $ReturnedValues. Calling .getType() and displaying the $ReturnedValues array's elements in the console shows the surprising behavior.
+            </p>
+            <p>            
+                This is the absolute worst part of PowerShell if I'm being honest. Advanced functions actually are worse, but classes are a great workaround
+                and are simpler. It turns out classes are also simpler than regular functions which should be as maddening to you as it is to me. This is
+                another one of those shell vs. script tradeoffs and after a lot of thought I can appreciate why it exists, but it never gets less annoying.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshFunctions/Functions-Example3-Result.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Example 4</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshFunctions/Functions-Example4.png') }}"></image><br>
+            </div>
+            <p>
+                If you were holding out hope that the Return statement would fix this nonsense, you're wrong. The above code still returns an object
+                array with three elements. There are really only two ways to deal with this problem. The first is to learn OOP and use classes since
+                they don't behave this way. The second is to be incredibly mindful of what you're doing while you're writing your scripts. You should
+                really do both; the first when appropriate and the second always.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshFunctions/Functions-Example4-Result.png') }}"></image><br>
+            </div>
+            <p>
+                I wanted to end this lesson with a warning. Don't go overboard with functions, especially if you use Java or some other 
+                compiled language. Wrapping your code in functions isn't necessary and using unnecessary things isn't a best practice. 
+                I'm guilty of doing this early in my career and if you want to create PowerShell modules, then yes, you'll want to wrap 
+                everything in a function, but there's a specific way to do this and it doesn't involve putting a function named Main() in 
+                all of your scripts.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

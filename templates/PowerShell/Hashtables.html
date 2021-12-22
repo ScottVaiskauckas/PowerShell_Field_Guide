@@ -1,0 +1,95 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 21 %}
+
+{% block title %} Hashtables {% endblock %}
+{% block activecrumb %} Hashtables {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Collections</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Hashtables</h1>
+            <p>
+                In this lesson, we are going to cover PowerShell hashtables.
+            </p>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Collections:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">What is a hashtable?</h2>
+            <p>
+                What is a hashtable? Hashtables go by different names in different programming languages. Sometimes they are 
+                called dictionaries, sometimes they are called associative arrays, and sometimes they are called hash maps.
+                They are all referring to the same data structure - one that is made up of key-pair values. With hashtables, 
+                the key is used to retrieve its paired value.
+            </p>
+            <p> 
+                <!-- TODO: -->
+                The syntax for creating hashtables is @{key0=value0; key1=value1; ... keyn=valuen}. One important characteristic 
+                to note about hashtables in PowerShell is that they are not ordered. 
+                <!-- Performance of hash maps -->
+            </p>
+            <h5 class="text-center my-4">Example 1</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshHashtables/Hashtables-Example1.png') }}"></image><br>
+            </div>
+            <p>
+                In our first example, we create a hashtable and assign it to the variable $HashTable. There are a couple of things I want to say
+                about this. The first thing I want to say is that I did not have to split this up over three lines. I did this so that I could 
+                keep all of the code on screen. The second thing I want to point out is that the syntax here looks similar to creating arrays. 
+                Please note that in addition to using curly braces, we are using semicolons and not commas.
+            </p>
+            <p>
+                The syntax for accessing the values associated for keys is also similar to accessing elements in other collection types. However, 
+                instead of using the index number, we use our keys. On line 9, we display type information in the console by calling .getType() on 
+                our $HashTable variable. We display our keys on line 11 and our values on line 13. On line 15, we call the .contains() method on 
+                $HashTable variable and search for the value "combo4". This method will return true if the hashtable contains this key and false if it does 
+                not. On line 17, we call the .ContainsValue() method on the $HashTable variable and search the hashtable for the value "reuben". This 
+                method will return true if the hashtable contains this value and false if it does not.
+            </p>
+            <p>
+                Finally, we display an important property of hashtables and that is that they are not ordered.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshHashtables/Hashtables-Example1-Result.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Example 2</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshHashtables/Hashtables-Example2.png') }}"></image><br>
+            </div>
+            <p>
+                In example 2, we start out as we did in the previous example. However this time, on lines 9 and 11 we call the .add() method on our hashtable 
+                and add the key-value pair combo4="turkey club" and the key-value pair combo5="lox bagel". Note the change when we display the keys and values
+                this time. On line 19, we call the .Remove() method on our hashtable and remove the key-value pair that has the key "combo5". We then display 
+                the hashtable in the console.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshHashtables/Hashtables-Example2-Result.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Example 3</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshHashtables/Hashtables-Example3.png') }}"></image><br>
+            </div>
+            <p>
+                PowerShell does provide an ordered hashtable data structure, which was a surprise to me when I was creating this example. I'm not used 
+                to using this kind of hashtable, so I'm not sure what the use cases would be, but you probably can do something cool with them. See the 
+                above code for the syntax.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshHashtables/Hashtables-Example3-Result.png') }}"></image><br>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

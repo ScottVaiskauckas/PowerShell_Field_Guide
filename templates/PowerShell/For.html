@@ -1,0 +1,86 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 16 %}
+
+{% block title %} For {% endblock %}
+
+{% block activecrumb %} For {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Control Flow</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">PowerShell For</h1>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Control_Flow:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">For loops</h2>
+            <p>
+                For loops are similar to while loops. They have a test condition and loop over a code block as long as that condition 
+                is true. However, they differ in that they are designed for situations where a loop will run a set number of times.
+                The syntax for a for loop is demonstrated below. First we have the for keyword, followed by three statements enclosed 
+                in parentheses. PowerShell calls these statements "Placeholders" and terms the first placeholder the "init" placeholder,
+                the second placeholder the "condition" placeholder, and the third statement the "repeat" placehold. After this, we have 
+                a statement list, which is the code to be executed when the "condition" placeholder evaluates to true.
+            </p>
+            <div class="row justify-content-md-center">
+                <div class="col-4">
+                    <h5 class="text-center my-4">For Loop Syntax</h5>
+                        <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshFor/For-Syntax.png') }}"></image><br>
+                </div>
+                <div class="col-4">
+                    <h5 class="text-center my-4">While Loops revisited</h5>
+                        <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshFor/For-While-Syntax.png') }}"></image><br>
+                </div>
+            </div>
+
+            <p>
+                The "init" placeholder represents code that gets executed before the loop begins. The most common thing to do here is 
+                to initialize a variable and assign it an integer value.
+            </p>
+            <p>
+                The "condition" placeholder works the same here as the condition in while loops and if statements. This is the part of 
+                the code that is evaluated to determine whether or not the loop will run. If it evaluates to $True, the code will run.
+            </p>
+            <p>
+                The "repeat" placeholder represents code that gets executed when the loop repeats. The most common thing to do here is 
+                to increment our variable we initialized in the "init" placeholder.
+            </p>
+
+            <p>
+                For loops are really just a shorthand for this specific kind of While loop where we initialize a variable before the loop,
+                test that value against a condition, and increment the value in our code block before looping over again.
+            </p>
+            <h5 class="text-center my-4">Example1</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshFor/For-Example1.png') }}"></image><br>
+            </div>
+            <p>
+                Here we have a basic For loop. Compared to while loops, there is a lot going on here on the very first line. First is 
+                the For statement, followed by a set of parentheses enclosing our "init" placeholder, our "condition" placeholder, and 
+                our "repeat" placeholder. We initialize a variable $i and assign it a value of 0 in our "init" placeholder. We then test 
+                this variable to see if it is greater than 3. It is not, so this condition is true. Our statement in curly braces on lines 
+                2-4 executes and PowerShell writes "The value of $i is 0" to the shell console. PowerShell executes the code in our "repeat" 
+                placeholder and increments the value of $i to 1. PowerShell once again enters the "condition" placeholder and evalues whether 
+                $i is less than 3. It isn't, so the statement executes once more writing "The value of $i is 1" to the console. PowerShell 
+                then enters the "repeat" placeholder again and increments the variable to 2. PowerShell enters the "condition" placeholder 
+                once again and evaluates whether or not $i is less than 3. It is, so PowerShell writes "The value of $i is 2" to the console.
+                PowerShell then increments the variable $i one more time. This time, when PowerShell reaches the "condition" placeholder, the 
+                condition evaluates to false. PowerShell exits the For loop and exits the script.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshFor/For-Example1-Result.png') }}"></image><br>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

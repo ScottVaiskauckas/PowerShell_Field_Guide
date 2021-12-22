@@ -1,0 +1,98 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 11 %}
+
+{% block title %} Else {% endblock %}
+
+{% block activecrumb %} Else {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Control Flow</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">PowerShell Else</h1>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Control_Flow:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">Else statements</h2>
+            <p>
+                Sometimes when you are writing scripts you will want to execute a code block if a test condition is met and a different
+                code block if that test condition is not met. Rather than forcing you to write an exhaustive list of if statements,
+                PowerShell provides you with the else construct.
+            </p>
+
+            <h5 class="text-center my-4">Example 1</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshElse/Else-Example1.png') }}"></image><br>
+            </div>
+            <p>
+                In our first example, we start by initializing a variable named $Condition1 and a variable named $Condition2 and assign
+                $Condition1 the value $True and assign $Condition2 the value $False. Next on line 4, we hit our first if statement and test
+                to see if $Condition1 is true. It in fact is so the first code block executes (lines 5-7) and PowerShell displays the text in
+                the console. PowerShell then exits out of this code block and skips over the code block following the Else statement (lines 8-10).
+                Following this, on line 12, we hit our second conditional statement and test to see if $Condition2 is true. It is not so we
+                skip over our first code block (lines 13-15) and execute the second code block.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshElse/Else-Example1-Flowchart.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshElse/Else-Example1-Result.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">If statements revisited</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshIf/If-Example2.png') }}"></image><br>
+            </div>
+            <p>
+                Above we have one of our code examples from our last lesson on if statements. Consider that in our second conditional
+                statement that cats aren't the only kind of animal that isn't a dog. Although it is true that cats aren't dogs, imagine
+                you want to expand the functionality of your script one day to accomodate animals other than cats. We can use the Else
+                statement to allow us to test for any kind of animal, even those yet undiscovered.
+            </p>
+            <h5 class="text-center my-4">Example 2</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshElse/Else-Example2.png') }}"></image><br>
+            </div>
+            <p>In Example 2, we do just that.</p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshElse/Else-Example2-Result.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Example 3</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshElse/Else-Example3.png') }}"></image><br>
+            </div>
+            <p>
+                Example 3 recreates our third example from the last lesson, but this time using the Else statement instead of two if statements.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshElse/Else-Example3-Result.png') }}"></image><br>
+            </div>
+            <!-- Redo this example in If lesson to reflect >= or < -->
+            <h5 class="text-center my-4">Example 4</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshElse/Else-Example4.png') }}"></image><br>
+            </div>
+            <p>
+                At the end of the last lesson, I mentioned that in addition to $True and $False, PowerShell also treated 1 as $True and 0
+                as $False. This was true, but in addition to the value 1, any non-zero number will be treated as $True. PowerShell will
+                also treat strings as true and nulls as false.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshElse/Else-Example4-Result.png') }}"></image><br>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

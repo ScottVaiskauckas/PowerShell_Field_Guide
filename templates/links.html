@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% set active_page = "links" %}
+
+{% block title %}Links{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item" aria-current="page"><a href="{{ url_for('home') }}">Home</a></li>
+<li class="breadcrumb-item active" aria-current="page">Links</li>
+{% endblock %}
+
+{% block content %} 
+<div class="card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">External Links</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div class="code-examples my-3">
+            <div class="h4-div mb-3 text-center"><h4>Resources</h4></div>
+        <p>
+            <ul>
+                <li>General shell information: <a href="https://ss64.com/">https://ss64.com/</a></li>
+                <li>Microsoft Documentation: <a href="https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-5.1">https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-5.1</a></li>
+                <li>Microsoft Documentation: <a href="https://powershell.org/">https://powershell.org/</a></li>
+            </ul>
+        </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

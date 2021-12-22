@@ -1,0 +1,193 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 3 %}
+
+{% block title %} Basics{% endblock %}
+
+{% block activecrumb %} Basics{% endblock %}
+
+{% block content %}
+<div class="content-card card mx-5 mb-5">
+	<div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Fundamentals</h1>
+    </div>
+	<div class="card-body justify-content-center">
+        <div>
+			<h2 class="text-center my-4">PowerShell - What is it?</h2>
+			<p>
+				PowerShell is at its core a toolbox filled with everything you will need as
+				a Windows power user. It provides ways to check system log files, navigate
+				the file system, change file permissions, create, read, and modify files,
+				create, read, and modify registry entries, check system information,
+				create, disable, and delete new users/user groups just to name a few things
+				it can do right out of the box.
+			</p>
+			<p>
+				To say it is a toolbox is to say it is not just a tool, but a container for
+				a number of different tools. At a macro level, it is a scripting language
+				and a shell language. This dual nature of PowerShell can lead to complexity
+				at times and in some cases, seemingly bad designs. Often when I see something
+				that makes me wonder why someone would ever want to use a particular syntax
+				I often have to shift my perspective from using the shell to scripting or
+				vice versa.
+			</p>
+			<p>
+				Beyond this it is also a toolbox made up of many small tools like you have
+				in other shell languages and scripting languages. There is the .Net framework
+				and it's classes, there are the CIM and WMI models, there are PowerShell cmdlets,
+				and there are operators, control flow statements, and other language constructs
+				you might encounter in a scripting language.
+			</p>
+			<h2 class="text-center my-4">PowerShell - Let's do stuff</h2>
+			<div class="row">
+				<div class="col-8">
+					<p>
+						First open PowerShell. The best way is to use the windows key + x to get the windows
+						power user menu. Now press i to open a PowerShell console as a regular user or
+						you can press x to open a PowerShell console as an administrator. You should only
+						use PowerShell as an administrator when you need to and be careful when you
+						are using it as an administrator. I am not responsible if you break your operating
+						system and I am not obligated to help you fix it if you do something reckless.
+						If you only use windows as a regular user it will make it much harder to do something
+						you will regret later. Not only this, but it is a good security practice to not use
+						an administrator account for regular day-to-day computer use. You should have two accounts
+						- one in the administrators group and one that is a regular user.
+					</p>
+					<p>
+						Now that you have the console open, copy and paste the following in your shell console window: Write-Host "Hello World";<br>
+						The syntax for this shell command can be broken into two parts. The first part is the cmdlet
+						and the second part is the argument. The cmdlet here is Write-Host. The argument is "Hello World;"
+						Cmdlets are similar to shell commands in other shell languages. They use a consistent style which is 
+						Verb-Noun. Not only this, but PowerShell provides a list of approved verbs for its cmdlets. Once 
+						you are familiar with a few different cmdlets you will be able to get a sense of what a cmdlet does
+						just by reading its name. PowerShell's stylization is one of its benefits when compared to 
+						other shell languages. By following a consistent pattern, PowerShell makes it easy to find new 
+						cmdlets or cmdlets with similar functions. 
+					</p>
+					<div class="d-flex justify-content-center container-fluid my-3">
+						<image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshBasics/Write-Host.png') }}"></image><br>
+					</div>
+				</div>
+				<div class="col">
+					<h6 class="text-center my-4">PowerUser Menu</h6>
+					<div class="d-flex justify-content-center container-fluid my-3">
+						<image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshBasics/PowerUserMenu.png') }}"></image><br>
+					</div>
+				</div>
+			</div>
+			<h2 class="text-center my-4">PowerShell - Scripts</h2>
+			<p>
+				We can create a file with a .ps1 extension and place PowerShell code inside of it to create
+				a script. Let's take our Write-Host cmdlet from before and place it inside of a file named
+				HelloWorld.ps1. Since this is a PowerShell tutorial, let's do these steps with PowerShell.
+			</p>
+			<div class="d-flex justify-content-center container-fluid my-3">
+				<image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshBasics/CreatePS1File.png') }}"></image><br>
+			</div>
+			<p>
+				If you want to, you can just copy the above commands yourself into your console. I am going to briefly
+				run through what everything is doing here so that you know exactly what you are doing to your
+				machine each step of the way. It is a good idea to fully understand what the consequences of a change
+				to your machine will be before making it. As a rule, I never run any shell commands I do not understand
+				unless it is a test machine that I created specifically for that purpose.
+			</p>
+			<p>
+				First we have Set-Location with an argument of Documents. I am starting in the Public users directory
+				so have Documents as a child directory. Set-Location is PowerShell's version of cd and, in fact, when
+				you use cd in PowerShell, you are actually using an alias for Set-Location. Set-Location takes the path
+				to a directory as an argument, in this case "Documents." I normally will use the aliases for Set-Location
+				unless I am writing a script. In general, I use aliases for convenience in the shell and the full cmdlet
+				names when writing scripts for clarity. One really cool thing about Set-Location is you can use UNC	paths 
+				in addition to mapped drives. 
+			</p>
+			<p>
+				Next we have New-Item. New-Item is a swiss-army knife cmdlet for creating, well, new items. It can handle
+				directories, files, and even registry items. Here we specify the itemtype to be a directory and the name
+				of the directory to be "PowerShell." If you run this cmdlet, it will create a new directory for you. If
+				you do not want that to happen, do not run this cmdlet.
+			</p>
+			<div class="row">
+				<div class="col">
+					<p>
+						We then Set-Location to that new Directory one more time. Pro-Tip: the tab key will autocomplete words
+						in the shell. If you type the letter P and hit tab, it will find this directory for you.
+					</p>
+					<p>
+						Now we type notepad.exe followed by the name of the file we wish to create. Notepad will try to open
+						this file and if it does not exit will show the following dialog box:
+					</p>	
+				</div>
+				<div class="col">
+					<div class="d-flex justify-content-center container-fluid my-3">
+						<image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshBasics/Dialogue.png') }}"></image><br>
+					</div>
+				</div>
+			</div>
+			<p>
+				Now paste Write-Host "Hello World"; in the file, save it and close notepad.exe
+			</p>
+			<div class="d-flex justify-content-center container-fluid my-3">
+				<image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshBasics/Script.png') }}"></image><br>
+			</div>
+			<p>
+				To run the script you just created, enter the path to the script. You can use relative paths here with .\
+				representing the current directory and ..\ representing the parent directory. This should be familiar
+				to *nix and Windows administrators, but I wanted to include it for anyone coming from a development background.
+			</p>
+			<div class="d-flex justify-content-center container-fluid my-3">
+				<image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshBasics/RunScript.png') }}"></image><br>
+			</div>
+			<p>
+				In the above example, we used notepad.exe to create our PowerShell script. While this is a fully 
+				acceptable way to write PowerShell scripts, there are better options than using notepad.exe to create 
+				your scripts. Windows 10 includes an application called the PowerShell ISE or integrated scripting
+				environment. This application is similar to IDEs or integrated development environments
+				used by programmers in other languages. It offers features such as intelligent code
+				completion, debugging tools, and a way to search for cmdlets as well as a GUI to help
+				get the syntax correct. While this utility is nice, I prefer to us Visual Studio Code.
+				This is a free text-editor style application like notepad+ or sublime text, but with
+				plugins is a really nice environment for developing PowerShell scripts. Really, you can use
+				whatever you want, even vim if it floats your boat. One of the reasons I like VS Code
+				is because it lends itself well to scripting and web development, so I can do everything I
+				need to in that IDE. When I am on a linux environment, I normally will use Sublime text
+				for my IDE. Outside of writing these lessons, I would never write PowerShell scripts on
+				a Linux machine.
+			</p>
+			<div class="d-flex justify-content-center container-fluid my-3">
+				<image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshBasics/ISE.png') }}"></image><br>
+			</div>
+			<h2 class="text-center my-4">PowerShell - Execution Policy</h2>
+			<p>
+				We can't really talk about PowerShell scripts without talking about running scripts and
+				specifically, why you won't be able to run scripts on a Windows 10 machine right out of the
+				box unless you create them on your own machine.
+			</p>
+			<p>
+				PowerShell has something called the Execution Policy which controls whether or not you
+				are able to run scripts on a machine. On a Windows 10 client, the default for this will
+				be restricted. This will allow you to run scripts you have written on your own machine,
+				but will not allow you to run scripts written on other machines. There are a few settings for this,
+				but it's one of the areas I think Microsoft's documentation is both thorough and easy to understand,
+				so I am not going to cover it in detail here. I do want to mention that the setting "Bypass" will
+				allow you to run scripts written by anyone on any machine. It's not a good idea to leave your
+				execution policy bypassed on your computer all of the time. There are better ways to manage
+				the execution policy and even ways to temporarily bypass it for the duration of a script.
+				For detailed information on Execution Policy settings, you can check Microsoft's documentation: 
+				<a href=""></a>
+			</p>
+			<div class="d-flex justify-content-center container-fluid my-3">
+				<image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshBasics/ExecutionPolicy.png') }}"></image><br>
+			</div>
+			<p>
+				The way to manage your execution policy is with the Get-ExecutionPolicy and Set-ExecutionPolicy
+				cmdlets. You are able to check your execution policy setting with Get-ExecutionPolicy and change
+				it with Set-ExecutionPolicy. You can check what it is set to as a normal user, but depending on the argument 
+				you provide the scope parameter, you may or may not need administrator permissions to change it. You are going to need to 
+				bypass it to follow along with my examples, but should set it to "Default" when you are done running my script examples.
+				One way to be safe about this is to limit the change to the scope of the process. This will only apply to your current
+				PowerShell session or PowerShell sessions created as child processes of your current PowerShell session.
+			</p>
+		</div>
+	</div>
+</div>
+{% endblock %}

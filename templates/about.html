@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% set active_page = "about" %}
+
+{% block title %}About{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item" aria-current="page"><a href="{{ url_for('home') }}">Home</a></li>
+<li class="breadcrumb-item active" aria-current="page">About</li>
+{% endblock %}
+
+{% block content %} 
+<div class="card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">About</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div class="my-3">
+            <p>
+                These lessons are from my field notes as a sysadmin. My intention is to publish them somehow once I finish editting them.
+                All work is my intellectual property/I own all information contained within.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 22 %}
+
+{% block title %} Read-Host {% endblock %}
+
+{% block activecrumb %} Read-Host {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Making Reusable Code</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Making your code reusable - Introduction</h1>
+            <p>
+                This is the first lesson in a series of lessons on making your code more reusable.
+            </p>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Functions:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">The problem</h2>
+            <p>
+                In the examples I have gone over so far, I have had hard coded values in my scripts. This works okay, but you'll 
+                have to edit the file any time you want to pass in different values. Also, if you have to do this frequently, it 
+                might lead to you keeping multiple copies of a script. This is not the best design for a few reasons. It is time 
+                consuming to maintain a fleet of scripts, first and foremost, but it also can lead to user error. Using file names 
+                to encode this information can get confusing and it's very easy to run the wrong script if you hide the details of 
+                the script away.
+            </p>
+            <h2 class="text-center my-4">Read-Host</h2>
+            <p>
+                There is a cmdlet named Read-Host which can be used to get information for the shell. This is one approach to making 
+                a script interactive and therefore reusable for a number of situations. When Read-Host is executed, PowerShell will pause
+                and wait for you to type some input then press the Return key. The input can be stored in a variable as a string.
+            </p>
+            <p>
+                This cmdlet is usually the first way someone who is moving to PowerShell from cmd.exe will try to approach this problem.
+                It will work, but can make your code a bit crowded and cumbersome if used too much. It's also not the most self-documenting 
+                code and hides away some of the details from other programmers. In my opinion, a better approach is to use parameters. There
+                is one exception to this and that is when handling passwords.
+            </p>
+            <h2 class="text-center my-4">Stdout, Stdin, Stderr</h2>
+            <p>
+                I have been trying to keep this material fairly light so far. I have been peppering in some high-level ideas, but I have been
+                avoiding going in to great detail when I do. It would be impossible to call lessons on any shell language complete without mentioning
+                stdout, stdin, and stderr.
+            </p>
+            <p>
+                These are our standard streams. I hope that if you're reading this far that you already know this, but if somehow you do not, computers
+                are machines that take inputs, process them in some way, then output the results. Standard streams are the communication channels for
+                inputs (stdin), outputs (stdout), and errors (stderr). Errors technically are an output stream, but one dedicated for error messages
+                and diagnostics.
+            </p>
+            <h5 class="text-center my-4">Streams</h5>
+            <p>
+                Most resources that cover standard streams never actually tell you what a stream is. Streams differ from files in that they are potentially
+                endless. Think about a radio broadcast. The radio station is constantly generating new content to broadcast. It is a potentially endless
+                source of data being streamed to us. We call this codata whereas files deal with data. Here's a fun article on the history of the Unix
+                command grep. <a href="https://thenewstack.io/brian-kernighan-remembers-the-origins-of-grep/">https://thenewstack.io/brian-kernighan-remembers-the-origins-of-grep/</a>
+                tl;dr - Back in the day, resource limitations would force researchers to treat large files as streams.
+            </p>
+            <h5 class="text-center my-4">Example 1</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshReadHost/ReadHost-Example1.png') }}"></image><br>
+            </div>
+            <p>
+                This example is incredibly short - just two lines! The first prompts the user (stdin) to enter their name and stores the result in the
+                variable $MyNameIs. The second writes the output to the console window (stdout).
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshReadHost/ReadHost-Example1-Result.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Example 2</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshReadHost/ReadHost-Example2.png') }}"></image><br>
+            </div>
+            <p>
+                Here, we're using the -AsSecureString switch to tell PowerShell we want it to store our input as a SecureString object. This object
+                will let you use passwords in your PowerShell scripts interactively in a secure way. This is one of the few times the Read-Host cmdlet
+                really is your best option. This script will set the password for your built-in administrator account. This is something you really
+                should set if you haven't already, so I recommend going ahead and doing this. You will have to run this script as a member of the
+                administrators group.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshReadHost/ReadHost-Example2-Result.png') }}"></image><br>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

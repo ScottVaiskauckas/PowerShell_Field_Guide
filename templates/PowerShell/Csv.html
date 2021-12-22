@@ -1,0 +1,115 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 32 %}
+
+{% block title %} Csv {% endblock %}
+
+{% block activecrumb %} Csv {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Solving Problems</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Storing data in csv files</h1>
+            <p>
+                This is the second lesson in a series of lessons on how you can save data so you can use it later with PowerShell.             
+            </p>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Peristance:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">Csv files</h2>
+            <p>
+                Csv files are files that use commas and returns to represent data in tabular format. The commas seperate table
+                columns and the returns represent rows. The first row contains the table header. You may have worked with these
+                files before in Excel or other spreadsheet software. PowerShell makes working with Csv files very easy. This is
+                great for generating reports since you can easily convert the file to .xlsx format for the technically challenged.
+            </p>
+            <h2 class="text-center my-4">Export-Csv</h2>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshCsv/Export-Csv.png') }}"></image><br>
+            </div>
+            <p>
+                The Export-Csv cmdlet will let you conver PowerShell objects to csv strings and save those strings to a csv file.
+                The strings retain the properties of the object, but lose the object's methods. Here you can see just how easy it is
+                to save the output from Get-Timezone by piping it into the Export-Csv cmdlet.
+            </p>
+            <h2 class="text-center my-4">Import-Csv</h2>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshCsv/Import-Csv.png') }}"></image><br>
+            </div>
+            <p>
+                The Import-Csv cmdlet will let you import the data you exported with Export-Csv back into the shell. We can run
+                Import-Csv and see our exported data has been preserved.
+            </p>
+            <h2 class="text-center my-4">Working with Csv data in the shell</h2>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshCsv/Import-Csv_With_Variables.png') }}"></image><br>
+            </div>
+            <p>
+                This is pretty cool, but you can really take this and run with it. Here I've assigned the output to a veriable. I can then change
+                the value of one of the objects properties. I could continue changing properties and probably use this object to modify my computer's
+                timezone by piping it into Set-Timezone. This is kind of a trivial example, but I wanted something that would demonstrate this idea
+                without requiring administrative permissions.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshCsv/Import-Csv_Get-Member.png') }}"></image><br>
+            </div>
+            <p>
+                This is kind of a lot again, but here I'm displaying the properties and methods of the object returned by Get-Timezone compared
+                to what is retained with the Export-Csv and Import-Csv cmdlets. Even if you find this hard to read, you can still notice that
+                some things are lost when we use these cmdlets. However, it's still an improvement over storing this in a .txt file.
+            </p>
+            <h5 class="text-center my-4">Write-DateToCsv</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshCsv/Write-DateToCsv.png') }}"></image><br>
+            </div>
+            <p>
+                In this example, the first 13 lines are really just getting things ready for us to use our Export-Csv cmdlet. On line 16,
+                We get the date with Get-Date and then pipe it into Export-Csv.
+            </p>
+            <h5 class="text-center my-4">Console</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshCsv/Write-DateToCsv-Result.png') }}"></image><br>
+            </div>
+            <p>
+                Here, I wanted to run the example in the console window, but also show you some other things. I change directory to the target
+                directory and display that there is a Get-Date.csv file now. I also want to open the file in notepad, but then I want to import
+                it back into the shell using the Import-Csv command and pipe it to Out-Gridview
+            </p>
+            <h5 class="text-center my-4">Csv file</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshCsv/Write-DateToCsv-Notepad.png') }}"></image><br>
+            </div>
+            <p>
+                This is a bit ugly and I don't expect you to try to read it, but I want you to look at the formatting in case you haven't seen a
+                csv file before.
+            </p>
+            <h5 class="text-center my-4">Out-Gridview</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshCsv/Write-DateToCsv-Out-Gridview.png') }}"></image><br>
+            </div>
+            <p>
+                If you have a spreadsheet application like Excel then you can open csv files and view them the same as xlsx files. If you don't have
+                one installed on a machine, you can use the Out-Gridview cmdlet to display the data in a table format.
+            </p>
+            <h5 class="text-center my-4">Export-AdminsToCsv</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshCsv/Export-AdminsToCsv.png') }}"></image><br>
+            </div>
+            <p>
+                This last script will let you export the members of the administrators group on a machine to a csv file. I am not going
+                to demo it for you because I don't want to go through the trouble of making sure the demos are safe to share. This script
+                will work, but you must run it as an administrator.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

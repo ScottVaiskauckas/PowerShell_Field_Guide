@@ -1,0 +1,66 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 18 %}
+
+{% block title %} Foreach {% endblock %}
+
+{% block activecrumb %} Foreach {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Control Flow</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">PowerShell Foreach</h1>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Control_Flow:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">Foreach loops</h2>
+            <div class="row justify-content-md-center">
+                <div class="col-4">
+                    <p>
+                        In the last lesson, I ended with an example of how to iterate through an array using a for loop and said that PowerShell provides a
+                        special kind of loop called a Foreach loop for just this purpose.
+                    </p>
+                </div>
+                <div class="col-4">
+                    <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshForeach/Foreach-Syntax.png') }}"></image><br>
+                </div>
+            </div>
+
+            <h5 class="text-center my-4">Example1</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshForeach/Foreach-Example1.png') }}"></image><br>
+            </div>
+            <p>
+                In our first example, we start by initializing an array with 4 elements named $ATXBirdArray and assign the strings "bluejays", 
+                "cardinals", "mocking birds", and "monk parakeets" on line 1. On line 3 we have our Foreach loop. We are going to iterate over 
+                the items in the $ATXBirdArray and use the $Bird variable as a reference to that item. PowerShell enters the loop and writes 
+                "You can find bluejays in Austin, Texas!" to the console. PowerShell reaches the end of the loop and moves on to the next item
+                in the array. PowerShell writes "You can find cardinals in Austin, Texas!" to the console. PowerShell once again reaches the 
+                end of the loop and moves on to the next item in the array. PowerShell now writes "You can find mocking birds in Austin, Texas!" 
+                to the console. PowerShell reaches the end of the loop and moves on to the next item in the array. PowerShell writes "You can find
+                monk parakeets in Austin, Texas!" and exits the loop.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshForeach/Foreach-Example1-Result.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Obligatory Foreach-Object alias Foreach warning</h5>
+            <p>
+                Every course on PowerShell I have ever seen has a warning that Foreach-Object has an alias named Foreach. It's almost impossible 
+                to accidentally use one in place of the other in practice. I'm mentioning it here for completeness, and to give you a handy rule 
+                of thumb. If you're piping commands into foreach, it is Foreach-Object. If you're not piping commands into foreach, you're using 
+                the foreach loop construct.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

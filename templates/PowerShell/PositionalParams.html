@@ -1,0 +1,82 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 24 %}
+
+{% block title %} Positional Parameters {% endblock %}
+
+{% block activecrumb %} Positional Parameters {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Making Reusable Code</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Making your code reusable - Positional Parameters</h1>
+            <p>
+                This is the second lesson in a series of lessons on making your code more reusable.
+            </p>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Functions:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">Parameters</h2>
+            <p>
+                Parameters are another, more commonly used way to provide input to scripts and cmdlets in PowerShell than using the Read-Host cmdlet.
+                Parameters allow you to provide values to a script when you call the script in the shell that will make the script do different things.
+                The values that you provide the parameters are called arguments.
+            </p>
+            <h2 class="text-center my-4">Positional Parameters</h2>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshPositionalParams/PositionalParams-Syntax.png') }}"></image><br>
+            </div>
+            <p>
+                There are two types of parameters in PowerShell, positional parameters and named parameters. I will be covering positional parameters here
+                and named parameters in the next lesson.
+            </p>
+            <p>
+                The syntax for a postional parameter is simple. All you have to do is reference the $args array in your code and you are good to go.
+                That's because parameters use the position of an argument to determine which parameter a programmer intended to use. This will be
+                more obvious when you can contrast positional parameters against named parameters (covered next lesson).
+            </p>
+            <h5 class="text-center my-4">Example 1</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshPositionalParams/PositionalParams-Example1.png') }}"></image><br>
+            </div>
+            <p>
+                Example 1 is a demonstration of positional parameters. The example itself is simple, here we only have three lines.
+                They each write a string to the console then print the positional parameter. When we run the script in the console
+                below, note that we provide values following the name of the script. These values are the arguments provided to the
+                positional parameters.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshPositionalParams/PositionalParams-Example1-Result1.png') }}"></image><br>
+            </div>
+            <p>
+                We can run the script again, this time providing different values for the positional parameters. I wanted to
+                point out that PowerShell really doesn't care what type you give it for a positional parameter. This (hopefully)
+                obviously can lead to some unintended consequences. When compared with named parameters, the code is not particularly
+                self-documenting.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshPositionalParams/PositionalParams-Example1-Result2.png') }}"></image><br>
+            </div>
+            <p>
+                This last demo shows that Powershell is so flexible with positional parameters, it will still run even if you don't provide arguments for
+                one or more.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshPositionalParams/PositionalParams-Example1-Result3.png') }}"></image><br>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

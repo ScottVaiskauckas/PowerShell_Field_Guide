@@ -1,0 +1,46 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 2 %}
+
+{% block title %} Getting Started {% endblock %}
+
+{% block activecrumb %} Getting Started {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Getting Started</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Script Example files</h1>
+            <p>
+                The following lessons will at times refer to PowerShell script examples. I have created completed and tested
+                code that is designed to help you as you learn. It is not required that you download these examples - I think
+                it will be possible to learn by just reading along. I think there is a certain level of confidence that comes
+                from reading about something then actually trying it yourself to see if you can get it to work. Over time, this
+                has been what has allowed me to dream bigger.
+            </p>
+            <h2 class="text-center my-4">Github Repository </h2>
+            <p>
+                These files are hosted in a github repo. You may find them here: 
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                First, navigate to that link, then click code, and then click Download Zip
+                <div class="d-flex justify-content-center container-fluid my-3">
+                    <image class="border img-fluid" src="{{ url_for('static', filename='images/repo.png') }}"></image><br>
+                </div>
+                Now, extract the files from the zip. Place the folder somewhere that is convenient for you to access. I think
+                placing it inside your Documents folder is a reasonable place. Some administrators like to create a directory
+                named scripts in their C:\ drives to hold their scripts. I think that's okay for production scripts, but
+                I think will be a bit of a PITA for our purposes here.
+            </p>
+            <p>
+                Since I have mentioned Github I want to say that I am a fan of git and use it for version control when
+                writing scripts. I recommend taking the time to learn git, especially if you're an administrator who is
+                comfortable with the commandline. I think you will find it is incredibly useful and easy to pick up, at
+                least as far as the basics are concerned.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

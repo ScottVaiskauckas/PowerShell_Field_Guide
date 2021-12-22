@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block breadcrumb %}
+<li class="breadcrumb-item" aria-current="page"><a href="{{ url_for('home') }}">Home</a></li>
+<li class="breadcrumb-item active" aria-current="page">{% block activecrumb %}{% endblock %}</li>
+{% endblock %}
+{% block poshnav %}
+<div class="text-center">
+    {% if page_number > 1 %} <a href="http://127.0.0.1:5000/PowerShell/{{page_number - 1}}">Previous</a> {% endif %}
+    <a href="http://127.0.0.1:5000/PowerShell/{{page_number + 1}}">Next</a>
+</div>
+{% endblock %}

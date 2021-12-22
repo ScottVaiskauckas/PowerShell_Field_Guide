@@ -1,0 +1,156 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 8 %}
+
+{% block title %} Assignment {% endblock %}
+
+{% block activecrumb %} Assignment {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Fundamentals</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Assignment Operators</h1>
+            <h2 class="text-center my-4">More Assignment Operators</h2>
+            <p>
+                In the last lesson, we learned that we assign data to variables with the equals
+                assignment operator. This is one of several operators that can be used to assign
+                values to variables.
+            </p>
+            <h2 class="text-center my-4">Operators</h2>
+            <div class="posh-op-table">
+                <table class="table text-center ">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Symbol</th>
+                            <th scope="col">Description</th>
+                        </tr>
+                    </thead>
+                    <tr scope="row">
+                        <td>=</td>
+                        <td>Assigns data to a variable</td>
+                    </tr>
+                    <tr scope="row">
+                        <td>+=</td>
+                        <td>
+                            Increases the value of the variable by the specified value, or appends the 
+                            specified value to the existing value.
+                        </td>
+                    </tr>
+                    <tr scope="row">
+                        <td>-=</td>
+                        <td>Decreases the value of the variable by the specified value.</td>
+                    </tr>
+                    <tr scope="row">
+                        <td>*=</td>
+                        <td>
+                            Multiplies the value of the variable by the specified value or appends the 
+                            specified value to the existing value.
+                        </td>
+                    </tr>
+                    <tr scope="row">
+                        <td>/=</td>
+                        <td>Divides the value of a variable by the specified value.</td>
+                    </tr>
+                    <tr scope="row">
+                        <td>%=</td>
+                        <td>
+                            Divides the value of a variable by the specified value and then assigns the 
+                            remainder (modulus) to the variable.
+                        </td>
+                    </tr>
+                    <tr scope="row">
+                        <td>++</td>
+                        <td>Increases the value of a variable, assignable property, or array element by 1.</td>
+                    </tr>
+                    <tr scope="row">
+                        <td>--</td>
+                        <td>Decreases the value of a variable, assignable property, or array element by 1.</td>
+                    </tr>
+                </table>
+            </div>
+            <h2 class="text-center my-4">Demonstrations</h2>
+            <h5 class="text-center my-4">+=</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshAssignmentOps/Demo-PlusEquals.png') }}"></image><br>
+            </div>
+            <p>
+                First we initialize the variable $a and assign it a value of 1. After this we use the += operator to add 5. If you're new to programming,
+                it may be helpful to think of it as shorthand for $a = $a + 5. Notice that nothing is displayed in the PowerShell console during this
+                operation. In order to see the change, we have to type the variable name again in the console.
+            </p>
+            <p>
+                We also can use this operator as a shorthand for concatenating strings. In this case, we must provide a string for the first argument
+                and a string for the second argument or other types, such as numeric types, which can be converted into strings.
+            </p>
+            <h5 class="text-center my-4">-=</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshAssignmentOps/Demo-MinusEquals.png') }}"></image><br>
+            </div>
+            <p>
+                Next we have -=. We start by initializing the variable $b and assigning it a value of 21. We then subtract 32 from $b and assign
+                the difference to the variable $b.
+            </p>
+            <h5 class="text-center my-4">++</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshAssignmentOps/Demo-Increment.png') }}"></image><br>
+            </div>
+            <p>
+                In programming, it is so common to increment or decrement a variable, that most languages provide a shorthand for x += 1 and x -= 1.
+                The syntax for incrementing a variable is ++.
+            </p>
+            <h5 class="text-center my-4">--</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshAssignmentOps/Demo-Decrement.png') }}"></image><br>
+            </div>
+            <p>
+                The syntax for decrementing a variable is --
+            </p>
+            <h5 class="text-center my-4">The placement of ++ and -- matters</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshAssignmentOps/Demo-Order.png') }}"></image><br>
+            </div>
+            <p>
+                With the increment and decrement operators, you have the option to place them before or after a variable in PowerShell. You will
+                get different results depending on where you place these operators. If you place ++ before a variable, it is called a pre-increment
+                operator and if you place ++ after the variable it is called a post-increment operator. If you use the pre-increment operator,
+                PowerShell will increment the value of the variable and return that value. If you use the post-increment operator, PowerShell will
+                increment the value of the variable, but return the value of the variable before the increment operation.
+            </p>
+            <h5 class="text-center my-4">*=</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshAssignmentOps/Demo-TimesEquals.png') }}"></image><br>
+            </div>
+            <p>
+                The *= operator like the += operator can accept numeric types or stings for inputs. With numeric types, it multiplies a variable by
+                the argument provided. In this example, we begin by initializing the variable $c and assigning a value of 6 to it. We then multiply
+                $c by 5 and assign the result to the variable $c. When we evaluate this variable on the next on line, we see that is has a value of
+                30.
+            </p>
+            <p>
+                Next, we assign a string to $c with the value "string". We then copy this variable 7 times by using the *= and providing a value of
+                7. When we evaluate $c on the next line, 
+            </p>
+            <h5 class="text-center my-4">/=</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshAssignmentOps/Demo-DivideEquals.png') }}"></image><br>
+            </div>
+            <p>
+                Here we demonstrate the /= operator. We start by initializing the variable $d and assigning it a value of 15. We then use the /= 
+                operator to divide $d by 3 and assign the difference to $d. The result is 5.
+            </p>
+            <h5 class="text-center my-4">%=</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshAssignmentOps/Demo-ModiEquals.png') }}"></image><br>
+            </div>
+            <p>
+                Last we have the %= operator. This one might be unintuitive if you've just learned how the modulus operator works. If we expand
+                this operator like we did the += operator it becomes $e = $e % 16. Since $e has a value of 9, it is the same as saying $e = 9 % 16.
+                9 % 16 is 9, so we assign the value 9 to the variable $e.
+            </p>
+    </div>
+</div>
+{% endblock %}

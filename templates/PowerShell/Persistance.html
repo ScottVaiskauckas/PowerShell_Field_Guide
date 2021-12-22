@@ -1,0 +1,87 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 30 %}
+
+{% block title %} Persistance {% endblock %}
+{% block activecrumb %} Persistance {% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item" aria-current="page"><a href="{{ url_for('home') }}">Home</a></li>
+<li class="breadcrumb-item" aria-current="page"><a href="{{ url_for('learn') }}">Learn</a></li>
+<li class="breadcrumb-item active" aria-current="page">PowerShell Persistance</li>
+{% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Solving Problems</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Saving State</h1>
+            <p>
+                This is the first lesson in a series of lessons on how you can save data so you can use it later with PowerShell.             
+            </p>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Peristance:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">The problem</h2>
+            <p>
+                When a script runs, a process is created and exists for the duration of that script. Any memory allocated to storing
+                objects or other values disappears once the process stops. Sometimes, in order to automate something, you will need
+                to store some data, possibly the last time a script ran or even the output from the script.
+            </p>
+            <h2 class="text-center my-4">Persistance</h2>
+            <p>
+                In computer science, when data outlives the process that created it, it is called persistance. We are storing the state
+                of the system (i.e. an object's properties) somewhere so that we can use it after our program is finished running.
+            </p>
+            <h2 class="text-center my-4">Ways to save state</h2>
+            <p>
+                There are a number of different ways to achieve this. Plain text files are possibly the simplest way to store state.
+                There are other data formats, such as xml, json, and csv, that while technically plain text files, have a more structured
+                syntax for storing data than a simple .txt file. These data formats are both relatively human-readable, yet also encode
+                data in a more machine-readable way when compared to .txt files.
+            </p>
+            <p>
+                In addition to plain text files, you can also use databases. You probably are familiar with SQL and MySql databases and may
+                even use one at work even if you are only an administrator. These databases, while powerful and secure, are probably not the
+                best choices to use when writing scripts. If for some reason you do need to use a relational database for your scripts, Sqlite
+                should be more than enough to meet your needs. This is a lightweight relational database management system written as a C
+                library that is packaged as part of a program instead of being hosted on a server. The Windows Registry is also technically a
+                database and you can use it to store state. While not as scary as it probably sounds, I would advise against doing this. The main
+                benefit I can see to storing state this way would be that people who aren't in the administrators group hopefully won't be able
+                to alter or destroy the data. There are probably always other better ways to do this using ACLs.
+            </p>
+            <h2 class="text-center my-4">Get-Date</h2>
+            <p>
+                One of the first scripts I wrote that really differentiated me from my teammates as "the scripting guy" involved storing a
+                timestamp of the last time the script ran. My boss thought it was magic and asked me a couple of times "how does it know what
+                day it is?" The magic behind the script was that all computers have some representation of the current time and every programming
+                language I've ever used has made that pretty easy to access. The only problems I had to solve were 1) how to format the date so it
+                worked and 2) how to store it after the program was finished running.
+            </p>
+            <p>
+                For this script, I was using Tcl on a legacy system, but fortunately for you we don't have to do that. PowerShell has a cmdlet named
+                Get-Date which will return the current date time. There are some switches for formatting the date, but we don't want to format our data
+                before we store it. We want to store the data in its original form and format it when we're using it later. 
+            </p>
+            <h5 class="text-center my-4">Get-Date</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshPersistance/Get-Date.png') }}"></image><br>
+            </div>
+            <p>
+                For the next three lessons, I am going to show you different ways to store the information returned from Get-Date so that you can
+                use it later. I will be covering the strengths and weaknesses of each. I will also be including an example of how to use PowerShell
+                to get the names of the members of the administrators group on a target machine and record that to an external file for later use.
+                This script is useful for auditing computers in a small organization where things may not be locked down very tight.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

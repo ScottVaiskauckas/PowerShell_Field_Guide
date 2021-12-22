@@ -1,0 +1,128 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 4 %}
+
+{% block title %} Datatypes {% endblock %}
+
+{% block activecrumb %} Datatypes {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Fundamentals</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Datatypes</h1>
+            <h2 class="text-center my-4">What is a datatype?</h2>
+            <p>
+                In writing this lesson, I reached out to some of my programmer friends from different disciplines.
+                I was trying to figure out how to explain this topic to my intended audience and to do it in a way
+                that doesn't feel too abstract. I realized that I learned what a data type was by context clues well
+                before I ever read a formal definition. By the time I actually did read a definition, I already knew
+                the most commonly used data types and how a few languages handled them differently. I don't think I
+                fully understood how necessary they were until I tried using VBScript or Tcl for the first time. Writing
+                unattended, mission-critical scripts with sufficient error-handling in a language that only provides
+                you with strings is a lot harder than you might think. My friends I reached out to had similar experiences
+                unless they were computer science majors.
+            </p>
+            <p>
+                I'm still not sure I have a great way to explain this concept without talking around it in addition to
+                providing a definition, so this is going to be the way I try to approach this topic. So what is the point
+                of data types and why do they matter? Data types tell a computer what kind of data some data is and what
+                to do with that data. This will make more sense once we cover a few data types.
+            </p>
+            <h2 class="text-center my-4">Common data types</h2>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshDataTypes/DataTypes.png') }}"></image><br>
+            </div>  
+            <h5 class="text-center my-4">Characters and Strings</h5>
+            <p>
+                As I alluded to before, some older scripting languages only had one data type and that was a string.
+                Strings are pretty easy to understand - they are a collection of characters. Characters themselves
+                are a datatype, and they are individual letters. I wanted to start with strings and characters because
+                they illustrate an important concept - some data types are created out of other, more basic data types.
+                These basic data types are often called primitives in many programming languages. They are the most 
+                fundamental building blocks from which everything else is created. I couldn't really find any documentation 
+                on this in PowerShell, but I was able to deduce the information from looking at the C# documentation and 
+                playing around in the PowerShell console. In C#, primitives are called built-in types. There are two main 
+                types - built-in types and reference types. Strings are a reference type and characters are a built-in type.
+                Since PowerShell and C# both use classes from the .Net framework, most things work similarly or the same in
+                both.
+            </p>
+            <h5 class="text-center my-4">Mathematical data types</h5>
+            <p>
+                In addition to strings and chars, we also have mathematical data types, such as integers, floats, and doubles.
+                These, like chars, are built-in types. Integers are positive or negative whole numbers. Floats and doubles both 
+                represent rational numbers, but with different levels of precision. Doubles are more precise than floats, but 
+                also require more memory.
+            </p>
+            <h5 class="text-center my-4">Booleans</h5>
+            <p>
+                There are also boolean data types, or True and False. In addition to keywords, these types usually can also be 
+                represented as 0 or 1 with 0 being false and 1 being true. Booleans are also built-in types in C#.
+            </p>
+            <h5 class="text-center my-4">Null</h5>
+            <p>
+                Before we get to the last data type, I wanted to mention that this is not a comprehensive list of built-in types.
+                These types live in the System namespace in the .Net framework and you can find them here:
+                <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types">https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types</a>
+                Now, with that in mind, the last data type we have is null. Null represents the absence of a value. A fun bit
+                of programming history is that the person who invented them later referred to null as his "billion dollar mistake."
+                <a href="https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/">https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/</a>
+            </p>
+            <h2 class="text-center my-4">PowerShell Type Accelators</h2>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshDataTypes/String-Example1.png') }}"></image><br>
+            </div>
+            <p>
+                At this point, we sure have spent a lot of time talking about C# and other scripting languages for a PowerShell
+                lesson. Now, let's talk about how they work in PowerShell and how you can make them work to your advantage.
+                Open a PowerShell console. Type "this is a string" and hit enter. Congratulations, you made a string. We can call
+                a method named .getType() on this text and see that it is in fact a string.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshDataTypes/Bool-Example1.png') }}"></image><br>
+            </div>
+            <p>
+                Let's try this again with a boolean. In PowerShell, the syntax for true is $true. Call .getType() on $true and
+                you can see that it is in fact a boolean. This seems really simple and straight forward, so let's try a couple
+                examples that maybe don't work out the way you think they would. Try calling .getType() on the integer 5 and also
+                on the letter "c". Make sure to not use the quotes around 5 so that it is an integer and not a string. Notice that
+                the letter "c" is a string and not a char and that we can't call .getType() on 5. 
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshDataTypes/IntChar-Example1.png') }}"></image><br>
+            </div>
+            <p>
+                We're going to get a little bit ahead of ourselves here since we will be covering variables in a later chapter,
+                but I think you'll be able to intuitively understand this. We are able to call .getType() on the integer 5 by
+                storing it in a variable first. Variables start with a $ in PowerShell. We store 5 in a variable named $Spam
+                and call .getType() on this variable. When we get the result we see it's actually of the type int32. This is
+                a 32 bit signed integer to be accurate, but I don't want to get bogged down in details.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshDataTypes/Int-Example2.png') }}"></image><br>
+            </div>
+            <p>
+                I mentioned before that PowerShell and C#'s built in data types come from the .Net framework. I also said that
+                they live in the System namespace. We can access these in PowerShell with aliases called type accelerators so
+                that we don't have to provide the namespace. The syntax for a type accelerator is to place the name of the type
+                inside of square brackets. We can use [int] for int32, [string] for strings, [bool] for booleans, [float] for floats,
+                [double] for doubles, and [char] for chars. Think back to when we tried to create a char before and it automatically
+                became a string. Assign the string "c" to a variable named $Char, but this time place the type accelerator [char]
+                before the variable. Call .getType() on this variable and this time it is a character.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshDataTypes/Char-Example2.png') }}"></image><br>
+            </div>
+            <p>
+                I have covered only a few of the available type accelerators in PowerShell. You can find a complete list here:
+                <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_type_accelerators?view=powershell-7">
+                    https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_type_accelerators?view=powershell-7
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

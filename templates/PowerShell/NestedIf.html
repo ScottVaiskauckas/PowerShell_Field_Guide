@@ -1,0 +1,76 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 12 %}
+
+{% block title %} If/Else {% endblock %}
+{% block activecrumb %} If/Else {% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item" aria-current="page"><a href="{{ url_for('home') }}">Home</a></li>
+<li class="breadcrumb-item" aria-current="page"><a href="{{ url_for('learn') }}">Learn</a></li>
+<li class="breadcrumb-item active" aria-current="page">PowerShell Nested If</li>
+{% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Control Flow</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">PowerShell Nested If</h1>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Control_Flow:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">Nested If statements</h2>
+            <p>
+                It may seem intuitive that it is possible to place an if-then statement inside of the code block of an else statement.
+                This is called a "nested if statement" in programming.
+            </p>
+            <h5 class="text-center my-4">Example 1</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshNestedIf/NestedIf-Example1.png') }}"></image><br>
+            </div>
+            <p>
+                Our first example demonstrates a simple nested if statement. We begin by initializing a variable named $Condition1 and assigning
+                it the value $False. We then initialize a variable named $Condition2 and assign it the value $True. Next, on line 4, we enter our
+                first conditional statement. We test $Condition1 and find it is false, so skip over the code in the first code block. We then enter
+                the code block of our else statement. Inside of this codeblock on line 9, we enter our second conditional statement. This conditional
+                statement is "nested" inside of the first conditional statement. We test $Condition2 and find it is true, so execute the code block
+                following the if statement. The script skips over the code block following the else statement and exits.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshNestedIf/NestedIf-Example1-Flowchart.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshNestedIf/NestedIf-Example1-Result.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Example 2</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshNestedIf/NestedIf-Example2.png') }}"></image><br>
+            </div>
+            <p>
+                Nested if statements may seem like an entirely reasonable thing to use when programming. However, with many nested if statements, 
+                they can become difficult to read very quickly. Consider the above example with four conditions. I promise you someone out there
+                has created production code using this method. In the spirit of inheriting an awful codebase from an ex-employee, I am not going 
+                to explain this code to you. You can parse it with your own eyes until they hurt so that you will never do something like this to 
+                anyone else in your career.
+            </p>
+            <p>
+                You might be thinking "there has to be a more reasonable way to do this" and there absolutely is. We will be covering this in our 
+                next lesson when we introduce the ElseIf keyword.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshNestedIf/NestedIf-Example2-Result.png') }}"></image><br>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

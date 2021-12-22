@@ -1,0 +1,132 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 10 %}
+
+{% block title %} If {% endblock %}
+{% block activecrumb %} If {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Control Flow</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">PowerShell If</h1>
+            <p>
+                Up until now our code examples were very simple, so I have been using the shell interactively for demonstrations.
+                The main reason I have done things this way is because I want you to gain confidence that you can get PowerShell to
+                work without spitting out a bunch of errors. If you try to use PowerShell to automate some task before you understand
+                how it works, you might feel as though all you can get it to do is create errors. When I have seen this happen, it's
+                usually because a module is missing or the execution policy is incorrectly configured. If you have no resources available
+                it can make PowerShell appear to have a "brick wall" learning curve, but if you start out with simple examples, it makes
+                the task appear to be more approachable. Moving forward, some of these lessons will include files with code examples.
+             </p>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Control_Flow:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">Control Flow</h2>
+            <p>
+                Imagine yourself as a helpdesk technician or computer operator whose job involves installing software patches
+                on Windows 10 clients in your organization. You are using a server to manage the software installations. Let's
+                assume you are using the tool msiexec.exe to install an .msi file containing the software update. Perhaps
+                some of the machines already have been patched and the rest need to be patched for compliance. You could have a
+                list of machines that already have been patched and only send the patch out to the machines that haven't been
+                patched. If you're less risk-averse you might even be willing to push the patch out to all of your Windows 10
+                clients and just will hope for the best. Maybe you've done a lot of testing to make sure this won't break machines.
+            </p>
+            <p>
+                A more elegant solution might be to query either configuration files or the registry on the machine to see if
+                this patch has already been applied before installing the software update. This is what is called the "look
+                before you leap" approach to error handling. Since making changes to a system always involves a level of risk, 
+                it is unwise to install a patch more than once when dealing with hundreds or thousands of client machines. Mistakes
+                like these are how you create extra work for yourself and the rest of your team.
+            </p>
+            <p>
+                In this example, what we are looking for is a way to branch our code so that given a set of conditions, some code
+                will execute sometimes (machines that haven't had the software patch applied), but not others (machines that have
+                already been patched). In computer science, and more specifically programming languages, control flow refers to the
+                order in which your lines of code (more accurately termed "statements") are executed. PowerShell, like most modern
+                programming languages, provides a number of constructs to manage the way your code executes. The first we will be
+                looking at are If-then statements.
+            </p>
+            <h2 class="text-center my-4">If statements</h2>
+            <p>
+                When we use the word "if" in English, we mean something will happen given a set of circumstance. In the sentence,
+                "If you pay me $5 dollars, I will make you a grilled cheese sandwich," given a condition is met (you give me five
+                dollars) an outcome will happen (I make you a grilled cheese sandwich). With conditional statements, the first part
+                is called the "if-clause" or "conditional clause" and the second part is called the consequence.
+            </p>
+            <p>
+                When we use "if" statements in PowerShell, we are saying "if a condition is met, execute the following block of code."
+                The syntax for this involves the keyword "if", followed by the condition, which is enclosed in a pair of parentheses,
+                and then followed by the script block, demarcated by two curly braces.
+            </p>
+            <h5 class="text-center my-4">Example 1</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshIf/If-Example1.png') }}"></image><br>
+            </div>
+            <p>
+                The above code sample demonstrates how to flow of execution branches based on whether the condition is true or false.
+                Here we simplify things by passing in Boolean values so that it is unambiguous whether or not the condition is true
+                or false. The script starts by executing the cmdlet Write-Host on line one and writes the string "My favorite animal is: "
+                in the console window. It then moves to line three, tests the condition, and since it is true, executes the code block,
+                writing the string "a dog" to the console window. It then exists the first conditional statement and moves on. Line 7
+                is an empty line, so it moves to line 8 where it hits another conditional statement. This time, when it tests the condition,
+                it determines it is false, so does not execute the code in the code block.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshIf/If-Flowchart.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshIf/If-Example1-Result.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Example 2</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshIf/If-Example2.png') }}"></image><br>
+            </div>
+            <p>
+                Our next example demonstrates using a variable in the conditional statement with the equals comparison operator. Here
+                we start with two variables and assign them the values of "Dog" and "Cat" respectively. Next we have a conditional
+                that tests to see if the variable $Animal1 contains the string "Dog". If it does, we write the string "A dog" to the
+                console window. It in fact does, so "A dog" is displayed in PowerShell when this script runs. Next we have a conditional
+                that tests to see if the variable $Animal2 contains the string "Cat". Since it does, PowerShell will write the string "Not
+                a dog" to the console window.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshIf/If-Example2-Result.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Example 3</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshIf/If-Example3.png') }}"></image><br>
+            </div>
+            <p>
+                Example 3 is almost identical to Example 2, but in this case we are using numeric types with comparison operators.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshIf/If-Example3-Result.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Example 4</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshIf/If-Example4.png') }}"></image><br>
+            </div>
+            <p>
+                Since this is our first practical example of using Booleans in PowerShell, I did want to mention that in addition to
+                $True and $False, PowerShell will also evaluate 1 as $True and 0 as $False.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshIf/If-Example4-Result.png') }}"></image><br>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

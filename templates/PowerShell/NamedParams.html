@@ -1,0 +1,148 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 26 %}
+
+{% block title %} Named Parameters {% endblock %}
+
+{% block activecrumb %} Named Parameters {% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item" aria-current="page"><a href="{{ url_for('home') }}">Home</a></li>
+<li class="breadcrumb-item" aria-current="page"><a href="{{ url_for('learn') }}">Learn</a></li>
+<li class="breadcrumb-item active" aria-current="page">PowerShell Named Parameters</li>
+{% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Making Reusable Code</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Making your code reusable - Named Parameters</h1>
+            <p>
+                This is the third lesson in a series of lessons on making your code more reusable.
+            </p>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Functions:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">Named Parameters</h2>
+
+            <div class="row justify-content-md-center">
+                <div class="col">
+                    <p>
+                        There is another kind of parameter in PowerShell called a named parameter. Unlike positional parameters, named
+                        parameters use the name of an argument to determine which parameter a programmer intended to use. Positional
+                        parameters save you a few lines of code, but at the cost of clarity. I prefer named parameters most of the time in
+                        PowerShell, though that is not true with all scripting languages.
+                    </p>
+                </div>
+                <div class="col">
+                    <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshNamedParams/NamedParams-Syntax.png') }}"></image><br>
+                </div>
+            </div>
+
+            <h5 class="text-center my-4">Example 1</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshNamedParams/NamedParams-Example1.png') }}"></image><br>
+            </div>
+            <p>
+                In the first example, we have two parameters, one for first name and one for last name. We run this code passing in the names
+                Scott and Vaiskauckas for the -Firstname and -LastName arguments.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshNamedParams/NamedParams-Example1-Result1.png') }}"></image><br>
+            </div>
+            <p>
+                We run the example again, this time passing in the argument Tosin to the -FirstName parameter and Abasi to the -LastName parameter.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshNamedParams/NamedParams-Example1-Result2.png') }}"></image><br>
+            </div>
+            <p>
+                We run the script a third time, however, this time we do not pass in any arguments. The script still runs fine, but the output
+                has spaces where the arguments for the -FirstName and -LastName parameters should be.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshNamedParams/NamedParams-Example1-Result3.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Example 2</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshNamedParams/NamedParams-Example2.png') }}"></image><br>
+            </div>
+            <p>
+                With example two, we can avoid this situation by providing default values for the parameters. PowerShell will use these values if
+                an argument is not passed to a parameter when the script is run. First we run the script passing the arguments Scott and Vaiskauckas again.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshNamedParams/NamedParams-Example2-Result1.png') }}"></image><br>
+            </div>
+            <p>
+                Now we run the script with no arguments and see that it uses the default values of Stephen for the -FirstName parameter and King for the
+                -LastName parameter.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshNamedParams/NamedParams-Example2-Result2.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Example 3</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshNamedParams/NamedParams-Example3.png') }}"></image><br>
+            </div>
+            <p>
+                PowerShell will allow you to use type accelerators to specify the type of a parameter and make it strongly typed.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshNamedParams/NamedParams-Example3-Result1.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Example 4</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshNamedParams/NamedParams-Example4.png') }}"></image><br>
+            </div>
+            <p>
+                PowerShell will also allow you to make parameters mandatory. This is another approach to making sure users don't run scripts without
+                providing values for arguments. This is very useful if you cannot reasonable predict what a default value for an argument should be.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshNamedParams/NamedParams-Example4-Result1.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Example 5</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshPositionalParams/PositionalParams-Example2.png') }}"></image><br>
+            </div>
+            <p>
+                In our last code example, I demonstrate using positional parameters with named parameters. If you're coming from a Python background,
+                things work a little bit differently here. With Python, positional parameters must precede named parameters (they're called positional 
+                arguments and keyword arguments in that language, but same idea). PowerShell really doesn't care what order you supply them or even if
+                you supply them at all unless told otherwise. See below:
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshPositionalParams/PositionalParams-Example2-Result1.png') }}"></image><br>
+            </div>
+            <p>
+                First we call our script providing arguments in a more pythonic way (positional parameters first, named parameters second). We see Jack Black
+                and three of his roles display in the console.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshPositionalParams/PositionalParams-Example2-Result2.png') }}"></image><br>
+            </div>
+            <p>
+                We call our script again this time displaying another Richard Linklater collaborator, Matthew McConaughey, and three of his roles displayed
+                in the console. However, when we call it this time, we take advantage of PowerShell's anything goes approach to parameters.
+            </p>
+    </div>
+</div>
+{% endblock %}

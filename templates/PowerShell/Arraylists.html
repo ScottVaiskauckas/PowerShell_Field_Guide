@@ -1,0 +1,60 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 20 %}
+
+{% block title %} Arraylists {% endblock %}
+
+{% block activecrumb %} Arraylists {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Collections</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Arraylists</h1>
+            <p>
+                In this lesson, we are going to cover PowerShell Arraylists.
+            </p>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using a file named PowerShellArraylists.ps1. This is a PowerShell script that contains
+                our example code. It is not required that you use this file to follow along, but I think it will be helpful.
+                You can find this file in the following github repo in a folder named examples:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">What is an arraylist?</h2>
+			<p>
+				There is a hybrid data structure called an arraylist that you may already know if you have experience with Java.
+				It is part array and part list and is a common data structure to encounter in other languages. You may see arraylists
+				in other people's examples and PowerShell may even use them at times behind the scenes.
+			</p>
+			<h2 class="text-center my-4">Don't use arraylists</h2>
+			<p>
+				Arraylists are deprecated in the .Net framework at the time of writing this article. Microsoft's documentation notes this 
+				and links to the documentation on lists. This is not because of security concerns, as far as I'm aware, but because the 
+				list data type has better performance than the arraylist. I am going to show you some examples with the arraylist data 
+				structure for legacy reasons, but you should not use this in your code.
+			</p>
+
+			<h5 class="text-center my-4">Example 1</h5>
+			<div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshArraylists/PoshArraylists-Example1.png') }}"></image><br>
+			</div>
+			<p>
+				This example is similar to the examples in our last lesson. We create the arraylist with similar, and also simpler, syntax
+				to the way we create lists. We add elements with the .add() method and remove elements with .remove() method and access element 
+				values as we did with our other collections. One difference is that the .add() method returns the element index and the .remove() 
+				method does not return true or false. Also, do note that arraylists can store any data type.
+			</p>
+			<h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshArraylists/PoshArraylists-Example1-Result.png') }}"></image><br>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 15 %}
+
+{% block title %} While {% endblock %}
+
+{% block activecrumb %} While {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Control Flow</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">PowerShell While</h1>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Control_Flow:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">While loops</h2>
+            <p>
+                While loops work a bit like if statements, but when we reach the end of the code block, instead of exiting the statement,
+                we go back to the beginning and test the condition again. We repeate this until the condition is $True.
+                <!-- TODO: Read other definitions and work on this part -->
+            </p>
+            <h5 class="text-center my-4">While Example 1</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshWhile/While-Example1.png') }}"></image><br>
+            </div>
+            <p>
+                In the first example, we begin by initializing a variable named $RunCount with a value of 1. Next we have our While statement
+                on line 3. Following the While keyword, we have our test condition which evaluates to true. Since the condition is true, the 
+                code block executes. PowerShell writes the string "The while loop has run 1 times" to the console. It then increments the value 
+                of $RunCount to 2. PowerShell reaches the end of the code block and moves back to the test condition. 2 is still less than or 
+                equal to 3, so the test condition is still true. The code block executes once again writing "The while loops has run 2 times"
+                to the console window and incrementing the $RunCount variable. PowerShell hits the end of the code block and moves back to the 
+                test condition. 3 is still less than or equal to 3 so the test condition is true. The code block executes one more time writing 
+                "The while loop has run 3 times" before incrementing the $RunCount variable again. Now PowerShell returns to the test condition 
+                again. This time, since $RunCount is 4, the condition fails and the While loop exits.
+            </p>
+            <h5 class="text-center my-4">Using break statements in while loops</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshWhile/While-Break.png') }}"></image><br>
+            </div>
+            <p>
+                We saw in the last lesson on Switch statements that the break statement can be used to break out of a control block. 
+                It can also be used to break out of while loops. Consider the code example above.
+            </p>
+            <p>
+                Here we have an example that is almost identical to our first example, with on exception; there is an if statement following 
+                the line where we increment our variable. This if statement tests to see if $RunCount is equal to 2. If it is, PowerShell will 
+                write "We're breaking out of the loop" and then exit the While loop. We can run the code and see this is in fact what happens.
+            </p>
+            <h5 class="text-center my-4">Infinite loops</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshWhile/While-InfiniteLoop.png') }}"></image><br>
+            </div>
+            <p>
+                Sometimes, it is possible to have a bug in your code where the test condition will always be true. Consider the above example. 
+                We have made a mistake here where we are decrementing $RunCount instead of incrementing, but still testing whether or not 
+                $RunCount is less than or equal 3. Since $RunCount begins as 1, we never fulfill the test condition.
+            </p>
+            <p>
+                In this case, the loop 
+                will never exit and so is called an "infinite loop." If you create this situation on your own machine, you can exit the loop 
+                by pressing ctrl+c.
+            </p>
+            <h5 class="text-center my-4">Do-While Example1</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshWhile/Do-While-Example1.png') }}"></image><br>
+            </div>
+            <p>
+                Consider that in some cases, it may be useful to execute a code block before evaluating whether or not a given condition is
+                true, then after it has run once, evaluate that condition and repeat the code if it is true. PowerShell provides us with Do-While
+                statements to do just this.
+            </p>
+            <p>
+                This code looks very similar to our While examples, however instead of a While statement, on line 3, we have the beginning of a 
+                do-while statement. The code following Do executes the first time no matter what. We then reach our test condition following the 
+                While keyword where we check to see if $RunCount is less than or equal to 3. It is equal to 2 now, so we execute the code block 
+                following the Do keyword once more. We reach our test condition and since $RunCount is 3 and 3 is less than or equal to 3, we 
+                execute the code block following the Do keyword once again.
+            </p>
+            <h5 class="text-center my-4">Do-Until Example1</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshWhile/Do-Until-Example1.png') }}"></image><br>
+            </div>
+            <p>
+                Do-Until works similarly to Do-While, except it executes UNTIL a condition is true, instead of WHILE it is true. Another way 
+                of stating that is Do-Until will execute WHILE a condition is false. The above example will produce identical results to the 
+                code in the Do-While example.
+            </p>
+            <!-- TODO: Walk through the code example -->
+        </div>
+    </div>
+</div>
+{% endblock %}

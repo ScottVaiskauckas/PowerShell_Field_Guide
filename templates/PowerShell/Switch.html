@@ -1,0 +1,126 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 14 %}
+
+{% block title %} Switch {% endblock %}
+
+{% block activecrumb %} Switch {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Control Flow</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">PowerShell Switch</h1>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Control_Flow:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">Switch statements</h2>
+            <p>
+                Switch statements work similar to If statements, however, instead of testing for one condition, they are able
+                to test for more than one condition. Switch statements begin with the keyword "switch," followed by a test value
+                enclosed in parentheses. After this, we have a condition or case, followed by code block, also called an "action." 
+                If the test value matches the condition, the switch statement executes the action. If it does not match the condition,
+                it moves on to the next switch case.
+            </p>
+            <h5 class="text-center my-4">Example 1a</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshSwitch/Switch-Example1a.png') }}"></image><br>
+            </div>
+            <p>
+                Here we start with the Switch keyword on line 1. We then enter a value of one for our condition to test. Next, we 
+                move to line 3, where see that we have a match. PowerShell writes "Case 1" to the console. It then moves onto the
+                next line where it hits a break statement. Break is a keyword in PowerShell which you can use to make it exit the 
+                control block it is currently executing.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshSwitch/Switch-Example1a-Result.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Example 1b</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshSwitch/Switch-Example1b.png') }}"></image><br>
+            </div>
+            <p>
+                Here we see the same example again, however this time we have changed our input to the value 2. We test to see if our
+                input matches the first case, and we find that it does not, so we do not execute the following code block. We then
+                move to our second case. Here we have a match so the code block following our second case executes. PowerShell writes
+                "Case 2" to the console window and exits the script.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshSwitch/Switch-Example1b-Result.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Default case</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshSwitch/Switch-Default.png') }}"></image><br>
+            </div>
+            <p>
+                What if we have some code we would like to execute when none of the cases? We can define a default case using the default
+                keyword for our case. Here we have defined a default case that will execute when our input doesn't match at the end of
+                the switch statement example we have been using so far. Since 3 does not match either of the defined cases, the action following
+                the default case executes and PowerShell writes "Default case" to the console Window.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshSwitch/Switch-Default-Result.png') }}"></image><br>
+            </div>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshSwitch/Switch-NoBreak.png') }}"></image><br>
+            </div>
+            <p>
+                What would happen if we were to leave out the break statement in our code blocks? Instead of exiting out of the switch
+                statement, PowerShell will move onto other cases to test if the condition matches. Let me show you what I mean.
+            </p>
+            <p>
+                On line 1 of the above code example, we have a switch statement with the test value of 1. PowerShell tests the value
+                of the first case and finds a match. It executes the code on line 5 and writes "Case 1" to the console. We said that
+                break statements are used to exit out of control blocks. Since we do not have a break statement, PowerShell moves on to our
+                second case and finds that the test value does not match. It does not execute the action and moves on to the third case.
+                Our third case tests for the value 1 again. Since it is a match, the following action will be executed and PowerShell will
+                write "Case 3" to the console window. Since there is no break statement in this action, PowerShell moves on to the next case.
+                Since the first and third cases matched, the action following the default case is skipped. PowerShell then reaches the end of 
+                the control block and exits out of the script.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshSwitch/Switch-NoBreak-Result.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Simplify if statements with a switch statement</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshSwitch/Switch-Simplify.png') }}"></image><br>
+            </div>
+            <p>
+                I wanted to demonstrate how a switch statement could be used to simplify an if statement that has multiple conditions. 
+                Consider that the code above and below will produce identical results:
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshSwitch/Switch-ElseIf.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshSwitch/Switch-Simplify-Result.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Example 2</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshSwitch/Switch-Example2.png') }}"></image><br>
+            </div>
+            <p>
+                I wanted to make sure I included an example using different types other than integers with the Switch statement. It will
+                also accept strings and other types as well.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshSwitch/Switch-Example2-Result.png') }}"></image><br>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

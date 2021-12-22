@@ -1,0 +1,114 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 7 %}
+
+{% block title %} Variables {% endblock %}
+
+{% block activecrumb %} Variables {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Fundamentals</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Variables</h1>
+            <p>
+               So far we've explored a decent amount of territory. Before we move forward I want to recap in case some readers
+               haven't been following along in order (I almost never learn things sequentially unless I force myself, so kudos 
+               to you for being human). We've learned about data types, we've looked at arithmetic operators and comparison
+               operators. We've also had some practice in the shell and discussed what PowerShell is at a high level.
+            </p>
+            <p>
+                Even with all we have covered so far, at this point we still can't really do much with PowerShell. You will be
+                able to use it as a glorified calculator, but not much else. Things are going to become much more interesting
+                now as we begin to cover variables, control flow, and functions.
+            </p>
+            <h2 class="text-center my-4">What is a variable?</h2>
+            <p>
+                If you've ever learned algebra you may have an idea of what a mathematical variable is. It is more or less a letter that
+                is used to represent an unknown number or perhaps, more along the lines of what we will be doing, the input to a function.
+            </p>
+            <p> 
+                When I was first learning programming, someone explained to me that a variable is kind of like a container that stores a 
+                value. This is actually a pretty inaccurate description, but I think it's probably helpful to conceptualize the idea for 
+                a beginner. In the programming languages I have encountered, a variable is more like a ticket for a coat check. It doesn't 
+                actually contain the coat, it just has a reference to the coat which can be used to get the coat when you need to.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshVars/PoshVars-InitAndAssign.png') }}"></image><br>
+            </div>
+            <p>
+                What is the syntax for a variable in PowerShell? Variables begin with a dollar sign ($) as in $Var. The second character may 
+                be a char or an int, however, some special characters are not allowed, for instance $` or $~.
+            </p>
+            <h5 class="text-center my-4">Assignment Operators</h5>
+            <p>
+                To "store" a value in a variable, we use the equals sign (=). This a different kind of operator than we have seen before; it is
+                called an assignment operator. We use these kinds of operators to assign a value to a variable. The syntax for assigning a value
+                to a variable is the variable name, followed by an equal sign, followed by the data you would like to assign to the variable.
+            </p>
+            <h5 class="text-center my-4">Initializing and assigning a variable</h5>
+            <p>
+                What is initiliazing and assigning a variable? In programming languages there are two parts to using a variable. The first is
+                initialization, or the act of creating the variable. The second is assignment, or assigning a value to that variable. In other
+                languages it is possible to do these at the same time or at different times. With PowerShell you are able to initialize and 
+                assign a variable at different times or at the same time. However, using uninitialized variables can lead to unintended consequences 
+                <a href="https://devblogs.microsoft.com/scripting/avoid-powershell-errors-by-initializing-variables/">(see Dr Scripto's blog post)</a>
+                and I think actually would be pretty hard to do when you're first starting out.
+            </p>
+            <!-- type accelerators and dynamic typing-->
+            <h2 class="text-center my-4">Revisiting types</h2>
+            <p>
+                One of the defining characterisics of a programming language is whether or not it is strongly typed or weakly typed. What 
+                this means is whether or not data of a certain type be coerced into a different type of data in a language. Some languages, 
+                like Python and Java, are strongly typed. Other languages, like Javascript are weakly typed. Normally, PowerShell behaves 
+                as a weakly typed language. In the example below, we create a variable named $WeakInt and store the value 5 in it. When we
+                call .getType() on this variable, we see that it is an Int32. We can then take this variable and assign a string to it.
+                PowerShell decided in this context it makes the most sense to treat the integer as a string and so it automatically becomes 
+                a string. If this were a strongly typed language, the variable would only be able to store data of the type int32.
+            </p>
+            <h5 class="text-center my-4">Weakly typed variables</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshVars/PoshVars-WeaklyTyped.png') }}"></image><br>
+            </div>
+            <p>
+                There are some cases in which PowerShell will treat variables as strongly typed instead of weakly typed. When we use type 
+                accelerators to declare a variable or to typecast a variable in PowerShell, that variable becomes strongly typed. In the
+                example below, we recreate our first example, except this time when we initiliaze the variable $StrongInt, we use the type
+                accelerator [int]. Now when we try to assign a string to this variable, PowerShell throws an error.
+            </p>
+            <h5 class="text-center my-4">Strongly typed variables</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshVars/PoshVars-StronglyTyped.png') }}"></image><br>
+            </div>
+            <p>
+                In creating the example here, I played around with this feature a bit to see if there were any limitations or caveats. One
+                thing that initially threw me for a loop is that under some conditions, PowerShell appears to have converted the type of
+                the data when it was created with a type accelerator. Consider you have a variable of type string storing the character "5".
+                You created this variable with the type accelerator [string]. What happens when we feed this as the second argument to the
+                addition operator? Do you think it will return 10? It in fact does. In this particular instance, I believe PowerShell is
+                creating a new integer and using this in place of the string before adding the values. While this would be easy to test,
+                it's unimportant for our purposes. This is an example of how PowerShell can keep you on your toes. Sometimes you will
+                encounter things that will give you pause or maybe not work the way you think they should. Keep this in mind as you
+                attempt to learn new things or develop your own scripts.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshVars/PoshVars-TypeAcceleratorGotcha.png') }}"></image><br>
+            </div>
+            <p>
+                Some people think it is a good practice, maybe best practice, to always use type accelerators in your PowerShell projects.
+                You can do this and it will be beneficial if you are working on a team with multiple people maintaining the same projects,
+                modules, or scripts. It is nice to know how someone else intended a variable to be used when they created it and also to
+                be reasonably certain that there are no bugs lurking because a piece of data was converted from one type to another. I
+                very much loved this feature when I first learned PowerShell because it was a scripting language that supported strongly
+                typed variables and I was coming from a Java background. As I have gained more experience with PowerShell, I rely less
+                heavily on this feature and more heavily on explicitly named variables. If something is a string, I usually use the word
+                string in the name, as in $CoolString. If it was an int32, I would probably call it $CoolInt. You can use whichever approach
+                you like and I personally think both approaches are appropriate for different situations and really are a matter of taste.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

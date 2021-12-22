@@ -1,0 +1,125 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 33 %}
+
+{% block title %} Persistance {% endblock %}
+
+{% block activecrumb %} Persistance {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Solving Problems</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Storing data in xml files</h1>
+            <p>
+                This is the third lesson in a series of lessons on how you can save data so you can use it later with PowerShell.             
+            </p>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Peristance:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">Xml files</h2>
+            <p>
+                I'm going to make one assumption here which may or may not be true. I'm going to assume that you understand what an xml
+                file is and how xml data is structured. The reason I want to make this assumption is this lesson is already going to be
+                longer than I want to write (I have a rule that if it's painful to write it's also painful to read). W3Schools is a good
+                place to brush up on this if you're new to working with xml files: 
+                <a href="https://www.w3schools.com/xml/default.asp">https://www.w3schools.com/xml/default.asp</a>
+            </p>
+            <h2 class="text-center my-4">Export-Clixml</h2>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshXml/Export-Clixml.png') }}"></image><br>
+            </div>
+            <p>
+                The next few examples are pretty much identical to the examples in the lesson on csv files. Export-Clixml exports the
+                data in clixml format. Clixml stands for Common Language Infrastructure XML and it is a way to represent .Net Framework
+                objects. This is stored in an xml file and can be imported later. Here we pipe the timezone from our machine with the
+                Get-Timezone cmdlet into Export-Clixml and export the data to a file named Demo.xml.
+            </p>
+            <h2 class="text-center my-4">Import-Clixml</h2>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshXml/Import-Clixml.png') }}"></image><br>
+            </div>
+            <p>
+                Import-Clixml is a cmdlet that imports the clixml data back into the shell.
+            </p>
+            <h2 class="text-center my-4">Working with Clixml data in the shell</h2>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshXml/Import-Clixml_With_Variables.png') }}"></image><br>
+            </div>
+            <p>
+                Here I've recreated the working with data in the shell example from the last lesson, except this time using xml files instead of csv
+                files. It's nice because you can pick whichever is most appropriate for your situation and things work mostly the same.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshXml/Import-Clixml_Get-Member.png') }}"></image><br>
+            </div>
+            <p>
+                Once again, when comparing the data before and after being exported with Get-Member, some of the methods are no longer available
+                when we import the data back into PowerShell.
+            </p>
+            <h5 class="text-center my-4">Write-DateToXml</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshXml/Write-DateToClixml.png') }}"></image><br>
+            </div>
+            <p>
+                Here we have our Write-Date script once again, but this time we are storing our date in clixml format.
+            </p>
+            <h5 class="text-center my-4">Console</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshXml/Write-DateToClixml-Result.png') }}"></image><br>
+            </div>
+            <p>
+                As a quick demo, I run the script on my machine and then change directories to display the output (Get-Date.xml). I then open
+                the file with notepad to see what's inside.
+            </p>
+            <h5 class="text-center my-4">Xml file</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshXml/Write-DateToClixml-Notepad.png') }}"></image><br>
+            </div>
+            <p>
+                If you stare at this for a minute you might be able to understand some of it and while it's not completely incomprehensible,
+                it's definitely harder to understand than the csv file in the last lesson.
+            </p>
+            <h5 class="text-center my-4">This is hard to read, why shouldn't I just use csv files?</h5>
+            <p>
+                Xml files do a better job preserving the original data than Csv in PowerShell. This should always be your goal since it is better to
+                keep the data in its original format until your ready to use it. Let me try to show you why. Let's import the date from our csv file
+                and store it in a variable named $Csv. I'm not sure what properties the original object had before I stored it, so I want to display
+                them in the console. I think the month property will be good for our purposes here.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshXml/CsvProperty.png') }}"></image><br>
+            </div>
+            <p>
+                I display that property in the console and you can see it is 11. But what type is it? Originally it was an Int32, but when we stored
+                it in our csv file, we converted it to a string.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshXml/XmlProperty.png') }}"></image><br>
+            </div>
+            <p>
+                If we do the same thing with the data stored in our xml file, we can see that clixml format preserved the type (Int32) of the original
+                Month property. If you're storing something that you are going to be consuming later with another script, it is better to export to an
+                xml file. If it is something you are saving like a report that someone else might want to read later, it is probably better to use csv
+                files.
+            </p>
+            <h5 class="text-center my-4">Export-AdminsToXml</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshXml/Export-AdminsToClixml.png') }}"></image><br>
+            </div>
+            <p>
+                This is the final iteration of our Export-AdminsToFile script. If I were using this script, this is the version I would use in production.
+                If I wanted to create reports for a supervisor, I would have another script that would collect this data and collate it into one csv file.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

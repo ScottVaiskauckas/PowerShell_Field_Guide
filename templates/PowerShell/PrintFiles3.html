@@ -1,0 +1,60 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 27 %}
+
+{% block title %} Print-Files3 {% endblock %}
+
+{% block activecrumb %} Print-Files3 {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Making Reusable Code</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Code Example - Print-Files</h1>
+            <p>
+                This is the third code example in a series of lessons on making your code more reusable. If you have been following along, you now
+                have enough knowledge to start building tools that will solve real world problems. I am going to walk you through developing a script
+                to demonstrate how to apply the concepts from the previous lesson.
+            </p>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Functions:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">Developing a script</h2>
+            <p>
+                This is part 3 of a series of lessons where we develop a script to print pdf files in alphabetical order in a target directory. So far,
+                we have taken this script and used the Read-Host command to extend its functionality to multiple situations. Following that, we
+                used positional parameters so that we could provide values for our script when we call it. Now, we are going to use named parameters
+                to make our script a more explicit, more human readable, easier to maintain, etc.
+            </p>
+            <h2 class="text-center my-4">Where we left off</h2>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshPrintFiles2/Print-FilesPP.png') }}"></image><br>
+            </div>
+            <p>
+                In part 2, we used positional parameters in conjunction with the Read-Host cmdlet to make our script more user friendly. At the
+                end, I teased that we would be using named parameters to simplify our script. Before we do, I want you to look at lines 1-28.
+                It's a lot to take in all at once and if you're seeing it for the first time you have to figure out what happens on each of those
+                lines.
+            </p>
+            <h2 class="text-center my-4">Named Parameters</h2>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshPrintFiles3/Print-FilesNP.png') }}"></image><br>
+            </div>
+            <p>
+                We can refactor our code using named parameters with default values or by making the parameter mandatory. Lines 1-4 here meet
+                all of the requirements we started with in part 1 and are much easier to comprehend than 28 lines of code. $MyInvocation.PSScriptRoot
+                gets the directory the script is executing in, so if no value is provided for that parameter, the script will print files in the folder
+                it is running from. Instead of a while loop, we can let PowerShell do the heavy lifting for us by making the parameter mandatory.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

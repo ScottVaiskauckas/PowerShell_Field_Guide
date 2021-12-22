@@ -1,0 +1,164 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 5 %}
+
+{% block title %} Mathematical Operators {% endblock %}
+{% block activecrumb %} Mathematical Operators {% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item" aria-current="page"><a href="{{ url_for('home') }}">Home</a></li>
+<li class="breadcrumb-item" aria-current="page"><a href="{{ url_for('learn') }}">Learn</a></li>
+<li class="breadcrumb-item active" aria-current="page">PowerShell Mathematical Operators</li>
+{% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Fundamentals</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Mathematical Operators</h1>
+            <h2 class="text-center my-4">What is an Operator?</h2>
+            <p>
+                Now that you understand datatypes, we can start to use these fundamental building
+                blocks to start doing things. First, a simple math review: 5 + 5 is called a math
+                expression. Math expressions consist of two numbers and an operator (+). You can
+                use PowerShell expressions to perform calculations in the shell or as part of a
+                script.
+            </p>
+            <h2 class="text-center my-4">Operators</h2>
+            <div class="posh-op-table">
+                <table class="table text-center">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Symbol</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                        </tr>
+                    </thead>
+                    <tr scope="row">
+                        <td>+</td>
+                        <td>Addition</td>
+                        <td>Add two numbers; Concatenate strings</td>
+                    </tr>
+                    <tr scope="row">
+                        <td>-</td>
+                        <td>Subtraction</td>
+                        <td>Subtract two numbers</td>
+                    </tr>
+                    <tr scope="row">
+                        <td>-</td>
+                        <td>Minus</td>
+                        <td>Make a number negative</td>
+                    </tr>
+                    <tr scope="row">
+                        <td>*</td>
+                        <td>Multiplication</td>
+                        <td>Multiply two numbers; Copies strings</td>
+                    </tr>
+                    <tr scope="row">
+                        <td>/</td>
+                        <td>Division</td>
+                        <td>Divide two numbers</td>
+                    </tr>
+                    <tr scope="row">
+                        <td>%</td>
+                        <td>Modulus</td>
+                        <td>Divides numbers and returns remainder</td>
+                    </tr>
+                </table>
+            </div>
+            <h2 class="text-center my-4">Demonstrations</h2>
+            <h5 class="text-center my-4">Addition</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshMathOps/Demo-Add.png') }}"></image><br>
+            </div>
+            <p>
+                Here we have an example of how the addition operator works in multiple scenarios. First, we add the numbers 3 and 4,
+                and like you would expect the output is 7. One detail that may not be so obvious is that we are adding to integers here
+                and the operator returns an integer with the value of 7. Next, we use the addition operator to join two strings together.
+                This is called concatenating two strings (fun fact: the Unix command cat is short for concatenate!).
+            </p>
+            <p>
+                Next up, we use the addition operator with a string and an integer. In this case, PowerShell treats the integer as a string
+                and concatenates it with the string. This is an example of operator overloading which PowerShell supports. Operator overloading
+                means the operators in a language can be used for different purposes depending on the arguments they are provided. In this case,
+                the addition operator can add numbers and also join strings. While this is something many programming languages support, not all
+                will support operator overloading. The last three examples demonstrate this concept using various numeric types and a string.
+            </p>
+            <h5 class="text-center my-4">Subtraction</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshMathOps/Demo-Subtract.png') }}"></image><br>
+            </div>
+            <p>
+                Next we have subtraction. This operator subtracts two numeric data types. In case you were wondering what happens if you try
+                to subtract a string from a number, PowerShell returns an error.
+            </p>
+            <h5 class="text-center my-4">Minus</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshMathOps/Demo-Minus.png') }}"></image><br>
+            </div>
+            <p>
+                In addition to subtraction, we also represent minus with this operator.
+            </p>
+            <h5 class="text-center my-4">Multiplication</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshMathOps/Demo-Multiply.png') }}"></image><br>
+            </div>
+            <p>
+                Up next, we have multiplication. This operator, like addition, behaves differently depending on whether it is given two
+                numeric types or a numeric type and a string. In the first case (two numeric types as arguments), the operator multiplies
+                the numbers and returns the values. When provided a string and a numeric type, it will copy the string. Please note, this
+                will only work if you provide the string as the first parameter. If you provide the integer as the first argument and a 
+                string for the second argument, it will error out.
+            </p>
+            <h5 class="text-center my-4">Division</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshMathOps/Demo-Divide.png') }}"></image><br>
+            </div>
+            <p>
+                The division operator is used to divide two numeric types.
+            </p>
+            <h5 class="text-center my-4">Modulus</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshMathOps/Demo-Modulus.png') }}"></image><br>
+            </div>
+            <p>
+                There is one last operator which you may or may not have heard of before depending on what background you have. This is the
+                modulus (sometimes called "modi") operator. This operator is indispensible and is used to return the remainder of a division
+                operation. To walk you through this a bit, take 31 and divide it by 16. You have 15/16 left over. In this case, modulus will 
+                return the value 15.
+            </p>
+            <h5 class="text-center my-4">Operator Precedence</h5>
+            <table class="table text-center">
+                <tr>
+                    <th scope="col">Precedence</th>
+                    <th scope="col">Operator</th>
+                    <th scope="col">Description</th>
+                </tr>
+                <tr scope="row">
+                    <td>1</td>
+                    <td>()</td>
+                    <td>Parentheses</td>
+                </tr>
+                <tr scope="row">
+                    <td>2</td>
+                    <td>-</td>
+                    <td>Minus</td>
+                </tr>
+                <tr scope="row">
+                    <td>3</td>
+                    <td>*, /, %</td>
+                    <td>Multiplication and division (and modulus!)</td>
+                </tr>
+                <tr scope="row">
+                    <td>4</td>
+                    <td>+, -</td>
+                    <td>Addition and subtraction</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

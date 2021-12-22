@@ -1,0 +1,140 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 29 %}
+
+{% block title %} Classes {% endblock %}
+
+{% block activecrumb %} Classes {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Making Reusable Code</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Objects, Classes, and OOP</h1>
+            <p>
+                In this lesson we are going to be diving into a topic we've tangentially discussed and that is
+                Object-Oriented Programming (OOP).
+            </p>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using a file named PowerShellOOP.ps1. This is a PowerShell script that contains
+                our example code. It is not required that you use this file to follow along, but I think it will be helpful.
+                You can find this file in the following github repo in a folder named examples:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">What is Object-Oriented Programming?</h2>
+            <p>
+                I think one of the more difficult aspects of understanding OOP when I first was learning programming is I didn't fully 
+                understand other programming paradigms so had nothing to contrast it against. There are many different programming
+                paradigms, but the three you may have heard about are procedural, functional, and object-oriented. So far the examples
+                we have covered have had more of a procedural approach. We've written some functions and used some objects, but we've
+                mostly been concerned with executing commands in a linear fashion.
+            </p>
+            <p>
+                OOP differs from other programming paradigms in that it uses objects that are representations of objects or things in 
+                the real world. Also like objects in real life, objects in OOP have attributes and can do things. We call the attributes 
+                "properties" and the actions the objects can do are called "methods."
+            </p>
+            <p>
+                But where do these objects come from? Objects come from templates called classes. Classes describe how to make a particular 
+                object, what properties it has, and what methods it has. The objects we have been working with so far have been come from 
+                classes in the .Net framework.
+            </p>
+            <h5 class="text-center my-4">Example 1: Defining a class in PowerShell</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshOOP/PoshOOP-Class.png') }}"></image><br>
+            </div>
+            <p>
+                Above we have our full code for defining a class. First, on line 2 we begin with the class keyword and then the name
+                of our class. We then enter into the code block which will contain our properties and methods. We inititialize our
+                two string properties on lines 5 and 6. Here we place the datatype of our properties inside of square brackets before
+                our variable names. Next, we have two methods for getting the property values as well as two methods for setting the
+                property values. We call these methods getter and setter methods. These methods are very common in OOP and most classes
+                you encounter in a language like Java have these. The purpose of these methods is to control access to setting and 
+                retrieving property values, but they are less important in PowerShell since we do not have a way to truly restrict
+                access to our properties (the "private" access modifier in other languages is not available here).
+            </p>
+            <p>
+                You may have noticed a weird variable named $this. $this just refers to the current class. So when we look at the
+                getter methods, we are returning whatever value is stored in the Breed property in the current class by referring to
+                the current class with the $this variable.
+            </p>
+
+            <h5 class="text-center my-4">Example 2: Creating an object instance of a class in PowerShell</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshOOP/PoshOOP-InstantiateObjects.png') }}"></image><br>
+            </div>
+            <p>
+                I hope now you have an understanding of how to define a class in PowerShell, but now that we have a class defined, how do 
+                we use it to create objects? There are actually two ways to create objects and we have seen both before when working with
+                arrays and arraylists. The first way to create an object in PowerShell is with the New-Object cmdlet (line 31). The other
+                way to instantiate objects is with the static new method we used as an alternative we to make arrays. Every .Net class
+                has a static new constructor which can be used to create an instance of the class. In order to use it, we specify the name
+                of the class in square brackets followed by two colons and the word new followed by a pair of parentheses.
+            </p>
+            <p>
+                I want to avoid discussing static methods in detail until next lesson so we can stay focused on how to create and use 
+                classes here. I did want to mention the syntax for instantiating objects this way now so that you can become familiar
+                with it. Once we have created our object instances and stored them in the variables $Wilfred and $Bubsy, we can then
+                set the property values for their breeds (line 32 and line 39) and names (line 33 and line 40).
+            </p>
+            <p>
+                We use our getter methods on lines 34, 35, 41, and 42 and return the following output to the console:
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshOOP/PoshOOP-Result1.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Example 3: Class Constructors</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshOOP/PoshOOP-Example2.png') }}"></image><br>
+            </div>
+            <p>
+                There is one more concept I want to cover in this first lesson on classes and that is class constructors. What is a class
+                constructor and why do we need it? Think back to our previous example. We created object instances on one line and later
+                assigned values to their properties. It might seem like there may be a more concise way to do this where we can
+                instantiate the object and assign values to the properties at the same time like we did when created variables and
+                assigned values to them at the same time. Not only that, but if we had an object with many properties it would get
+                pretty redundant creating them this way if we needed more than one instance for a script or program. Lastly, consider that
+                there are some objects that we should never instantiate without any properties. Imagine in our last example with our
+                Dog class that one of the properties was the dog's weight. It doesn't really ever make sense for us to instantiate a 
+                weightless dog unless we are in space!
+            </p>
+            <p>
+                We can solve all of these problems by defining a class constructor in the class definition. A class constructor is
+                used to tell PowerShell how to construct the class. All classes in PowerShell have a class constructor, but if we don't
+                define one ourselves, PowerShell will assume we want to use a default constructor where we just create the class and do
+                not set any properties. See below for the syntax for a class constructor.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshOOP/PoshOOP-Example2Constructor.png') }}"></image><br>
+            </div>
+            <p>
+                You may notice that the class constructor has the same name as the class itself, followed by two parantheses for input
+                parameters, followed by a block of code where we set the value of the class's properties to the values input as
+                parameters. It is a convention I learned from Java to keep these names the same and since C# is similar, I follow this
+                pattern, but it is not a requirement to have the parameters be named the same as the properties. It would be confusing
+                to me if someone didn't do that, but technically the syntax will work. It is also possible to have a class constructor
+                without any input parameters. We could have default values we always set the properties to without inputting them ourselves.
+                See below for the output of this example.
+            </p>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshOOP/PoshOOP-Result2.png') }}"></image><br>
+            </div>
+            <p>
+                There's a lot more to cover about OOP and classes in PowerShell beyond what I have covered here. I am going to be
+                creating more lessons around the topic and demonstrating some techniques that can get you started creating your
+                own classes in PowerShell for your projects. If there is anything I want an IT admin with no programming knowledge
+                to take away from this, it is to be thinking of PowerShell more in terms of objects than a stream of codata as you
+                would in other shells.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

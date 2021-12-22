@@ -1,0 +1,350 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 34 %}
+
+{% block title %} MsiExec {% endblock %}
+
+{% block activecrumb %} Msiexec {% endblock %}
+
+{% block content %} 
+<div class="content-card card mb-5 mx-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">MsiExec Tutorial</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">PowerShellMsiExec</h1>
+            <p>
+                One of the most common tasks for a helpdesk employee, sysadmin, or IT manager 
+                is to automate software deployment. With Windows, this task is fairly easy to 
+                achieve with a batch file using the msiexec.exe program. However, it is also possible 
+                to do this using PowerShell as a wrapper to access a flexible language with C-style 
+                control flow, tons of options for creating an interactive UI, access to the .Net 
+                framework, and more modern error handling than what you might see with traditional 
+                shell scripting languages.
+            </p>
+            <p>
+                In this tutorial, I am going to go over an example that includes a function that will install 
+                Google Chrome with msiexec.exe and a function to display the exit code of the log files in the shell.
+            </p>
+            <h2 class="text-center my-4">Getting started: </h2>
+            <p>
+                Go to the following link:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                Click code and then click Download Zip
+                <div class="d-flex justify-content-center container-fluid my-3">
+                    <image class="border img-fluid" src="{{ url_for('static', filename='images/repo.png') }}"></image><br>
+                </div>
+                Now, extract the files from the zip. Navigate to the directory named PowerShellMsiExec
+            </p>
+            <div>
+                <h3 class="my-3 text-center">Directory Structure</h3>
+                    <div class="directory-tree my-3">
+                        PowerShellMsiExec\<br>
+                        |-- Get-Logs.bat<br>
+                        |-- Install-Software.bat<br>
+                        |-- PowerShellMsiExe.psd1<br>
+                        |-- PowershellMsiexec.psm1<br>
+                        |--Controllers\<br>
+                        <span class="ml-4">|-- Get-Logs.ps1</span><br>
+                        <span class="ml-4">|-- Install-Software.ps1</span>
+                    </div>
+                <div>
+                    In this repo there are seven files total:
+                    We are going to cover them in the following order:
+                    <ol class="mt-3">
+                        <div class="topic-list">
+                            <li>
+                                PowerShellMsiExec.psm1
+                            </li>
+                            <li>
+                                PowershellMsiexec.psd1
+                            </li>
+                            <li>
+                                Controllers\Get-Logs
+                            </li>
+                            <li>
+                                Controllers\Install-Software.ps1
+                            </li>
+                            <li>
+                                Install-Software.bat
+                            </li>
+                            <li>
+                                Get-Logs
+                            </li>
+                        </div>
+                    </ol>
+                </div>
+            </div>
+            <div class="posh-module">
+                <h2 class="text-center my-4">PowerShell Module and Module Manifest</h2>
+                <h3 class="text-center my-3">PowerShellMsiExec.psm1</h3>
+                <p>
+                    The first file we are going to look at is PowerShellMsiExec.psm1. This is a PowerShell Module file. I 
+                    like to use PowerShell Module files instead of regular .ps1 PowerShell scripts because they allow you 
+                    to import the commands into your shell. You can also easily wrap them in a .ps1 controller script to 
+                    get the best of both worlds. I will be demonstrating this as part of this tutorial in the section on 
+                    Controllers.
+                </p>
+                <p>
+                    If you open this file with the ISE or other code editor software you will find two functions. The first 
+                    is a function named Install-Software and the second is a function named Get-Logs.
+                </p>
+                <h4 class="text-center my-3">Install-Software</h4>
+                <p>
+                    First we are going to go over Install-Software. This function handles the installation of Google Chrome. 
+                    See below for the complete code:
+                </p>
+                <div class="d-flex justify-content-center container-fluid my-3">
+                    <image class="img-fluid center-block" src="{{ url_for('static', filename='images/modules/psm1-install-software-all.png') }}"></image>
+                </div>
+                <p>
+                    Inside of this function there are essentially three sections of code. The first is variable assignment, 
+                    the second is a bit of logic to make sure msiexec.exe does not fail, and the last is the code that executes 
+                    the command.
+                </p>
+                <h5 class="text-center my-3">Variable Assignment</h5>
+                <div class="d-flex justify-content-center container-fluid my-3">
+                    <image class="img-fluid" src="{{ url_for('static', filename='images/modules/psm1-install-software-param.png')}}"></image>
+                </div>
+                <p>
+                    The way I like to handle variable assignment is to initialize as many variables as is reasonable as input parameters 
+                    with default arguments. What is reasonable is going to vary by use case and will be subjective. Some people may argue 
+                    that this is a bad practice since function arguments should be limited to three or fewer parameters, but I think that 
+                    by using good judgment, objects, and the pipeline it is possible to do both.
+                </p>
+                <p>
+                    [CmdletBinding()] is documented here: 
+                    <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_cmdletbindingattribute?view=powershell-7">https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_cmdletbindingattribute?view=powershell-7</a>
+                </p>
+                <p>
+                    The three input parameters are <span class="posh-variable">$Path</span>, <span class="posh-variable">$FileName</span>, 
+                    and <span class="posh-variable">$LogDir</span>.
+                    <span class="posh-variable">$Path</span> is the path to the parent directory of the .msi file.
+                    <span class="posh-variable">$FileName</span> is the name of the .msi file including file extension.
+                    <span class="posh-variable">$LogDir</span> is the path you would like MsiExec to log the files.
+                </p>
+                <p>
+                    In this example, we are assuming the user has downloaded an archive containing the 64 bit version of Chrome from: 
+                    <a href="https://chromeenterprise.google/browser/download/">https://chromeenterprise.google/browser/download/</a> 
+                    and extracted the contents to the downloads folder. 
+                </p>
+                <p>
+                    <span class="posh-variable">$Path</span><br>
+                    <span class="posh-variable">$env:userprofile</span> is an environment variable that points to the currently signed 
+                    in user’s profile. If you are used to creating batch scripts, it is the equivalent of %UserProfile%. In this case 
+                    the default string value in <span class="posh-variable">$Path</span> is going to be 
+                    “C:\users\%username%\downloads\GoogleChromeEnterpriseBundle64\Installers.”
+                </p>
+                <p>
+                    <span class="posh-variable">$FileName</span><br>
+                    This should be pretty straight forward. It’s just the name of the file including the file extension.
+                </p>
+                <p>
+                    <span class="posh-variable">$LogDir</span><br>
+                    This is a target directory for MsiExec to create a log file.
+                </p>
+                <p>
+                    Overriding default Parameter values
+                </p>
+                <p>
+                    If you want to override default parameter values, you are able to by calling the function and provide a value for the 
+                    parameter. For instance Install-Software -LogDir “<span class="posh-variable">$env:userprofile\logs</span>”
+                </p>
+                <h5 class="text-center my-3">Creating a directory for the log files</h5>
+                <div class="d-flex justify-content-center container-fluid my-3">
+                    <image class="img-fluid" src="{{ url_for('static', filename='images/modules/psm1-install-software-create-logdir.png')}}"></image>
+                </div>
+                <p>
+                    The next bit of code makes sure that the target directory for the log file exists.
+                    This is very important, for if you give msiexec.exe an invalid path to create a log file, it will fail to install the software.
+                </p>
+                <h5 class="text-center my-3">Installing the software</h5>
+                <div class="d-flex justify-content-center container-fluid my-3">
+                    <image class="img-fluid" src="{{ url_for('static', filename='images/modules/psm1-install-software-msiexec.png')}}"></image>
+                </div>
+                <p>
+                    The last part of this script handles installing the software. 
+                    First we create a variable named <span class="posh-variable">$ArgumentList</span> and pass 
+                    in any arguments we may have for msiexec.exe as a string. Then, we execute the command Start-Process msiexec.exe 
+                    -ArgumentList <span class="posh-variable">$ArgumentList</span>.
+                </p>
+                <p>
+                    For those administrators out there who are already familiar with msiexec.exe, this is the equivalent of the command: 
+                    <div class="code-example">msiexec.exe /package &lt;path\filename&gt; /passive /log &lt;path\logfile.log&gt;</div>
+                </p>
+                <h4 class="text-center my-3">Get-Logs</h4>
+                <p>
+                    Next we are going to go over a function called Get-Logs. This function will read the contents of the log file generated 
+                    by msiexec.exe and display the output in the shell window. See below for the complete code:
+                </p>
+                <div class="d-flex justify-content-center container-fluid my-3">
+                    <image class="img-fluid" src ="{{ url_for('static', filename='images/modules/psm1-get-logs-all.png') }}"></image>
+                </div>
+                <p>
+                    This script, like the previous example can be subdivided into constituent parts. In this case, I would consider there to 
+                    be four parts. The first, again, is variable assignment, the second is reading the contents of the log files, the third 
+                    is formatting the data, creating PSCustomObjects, and storing those objects in an Arraylist, and the fourth is creating 
+                    an Array to return the data.
+                </p>
+                <h5 class="text-center my-3">Variable Assignment</h5>
+                <div class="d-flex justify-content-center container-fluid my-3">
+                    <image class="img-fluid" src="{{ url_for('static', filename='images/modules/psm1-get-logs-param.png')}}"></image>
+                </div>
+                <p>
+                    In this case we have one input Parameter. It is Path. There is no default value for path and it is a mandatory parameter. 
+                    This means if you do not supply one, PowerShell will prompt you for one at the command line before continuing.
+                </p>
+                <h5 class="text-center my-3">Reading Log Files</h5>
+                <div class="d-flex justify-content-center container-fluid my-3">
+                    <image class="img-fluid" src="{{ url_for('static', filename='images/modules/psm1-get-logs-logfiles.png')}}"></image>
+                </div>
+                <p>
+                    For the next part of the script, we first get all the children of the parent log directory and store this in a variable 
+                    called <span class="posh-variable">$LogFiles</span>. <span class="posh-variable">$LogFiles</span> is an object array. 
+                    This, although unnecessary in this use case, is useful for when installing software with patches, software with 
+                    dependencies, or when installing software as a post OS deployment/imaging task. When performing one of these tasks, 
+                    you may want to check more than one log file in a target directory at the same time.
+                </p>
+                <h5 class="text-center my-3">Arraylist</h5>
+                <div class="d-flex justify-content-center container-fluid my-3">
+                    <image class="img-fluid" src="{{ url_for('static', filename='images/modules/psm1-get-logs-arraylist.png')}}"></image>
+                </div>
+                <p>
+                    We now initialize a variable named <span class="posh-variable">$ArrayList</span> that holds an ArrayList object from the 
+                    .Net framework. We then iterate over the contents of the <span class="posh-variable">$LogFiles</span> object array. We 
+                    first read the file with Get-Content and store it in the <span class="posh-variable">$Contents</span> variable. We then 
+                    search the log file for the string  "Installation success or error status:" and store it in 
+                    <span class="posh-variable">$ErrorStatus</span>. Explaining msiexec.exe is out of scope for this article, but a helpful 
+                    hint is that any code other than 0 means the installation probably failed. You can search for these codes in your 
+                    favorite search engine (DuckDuckGo) or you can contact support and request assistance from the vendor.
+                </p>
+                <p>
+                    We then split this data using the case sensitive csplit operator on the letter “P” and store it as an array in the variable 
+                    <span class="posh-variable">$ErrorStatus</span>. We take the first element from 
+                    <span class="posh-variable">$ErrorStatus</span> and store it as <span class="posh-variable">$OperationType</span>. We then 
+                    take the second element from <span class="posh-variable">$ErrorStatus</span>, prepend a “P” to the string, then reassign 
+                    <span class="posh-variable">$ErrorStatus</span> so it now references the string.
+                </p>
+                <p>
+                    We then split this data using csplit one more time on the letter “M” and then once again reassign 
+                    <span class="posh-variable">$ErrorStatus</span> to hold the resultant array. We then store the first element in the 
+                    variable <span class="posh-variable">$ProductInfo</span>. We take the second element, prepend the letter “M” and reassign 
+                    <span class="posh-variable">$ErrorStatus</span> to hold this string.
+                </p>
+                <p>
+                    Now we create a PSCustomObject and store it in the variable <span class="posh-variable">$LogObject</span>. Next we add 
+                    the data from <span class="posh-variable">$OperationType</span>, <span class="posh-variable">$ErrorStatus</span>, and 
+                    <span class="posh-variable">$ProductInfo</span> as properties to the object. Lastly, we add the object to the ArrayList. 
+                    This will repeat until there are no more files to read.
+                </p>
+                <h5 class="text-center my-3">Array</h5>
+                <div class="d-flex justify-content-center container-fluid my-3">
+                    <image class="img-fluid" src="{{ url_for('static', filename='images/modules/psm1-get-logs-array.png')}}"></image>
+                </div>
+                <p>
+                    We then initialize an <span class="posh-variable">$Array</span> variable of type Object[] with a size equal to the 
+                    number of items in the <span class="posh-variable">$ArrayList</span>. We then use a For loop to populate the Object[] 
+                    <span class="posh-variable">$Array</span> with the data from the <span class="posh-variable">$Arraylist</span> 
+                    variable. We then return the <span class="posh-variable">$Array</span>.
+                </p>
+                <p>
+                    Why did we not just return the <span class="posh-variable">$Arraylist</span>? Isn't this extra work unnecessary? Won't 
+                    it hurt performance? PowerShell is a little bit wonky in the way it handles data in functions. It will return pretty 
+                    much everything you explicitly tell it what to return with a return statement. This is great when working at the shell, 
+                    but it can be confusing when writing scripts. The way I like to code around this is to create a PSCustomObject and then 
+                    to add properties to the object to store the data. I then create an array to hold the objects and then can easily return 
+                    the array of objects with all of the data. This makes it possible to pass the objects down the pipeline and do things 
+                    like Out-Gridview or Export-CSV.
+                </p>
+                <p>
+                    If you are going to do this, it is best to first populate an arraylist with the objects then once you are done creating the
+                    arraylist, to use the data in the arraylist to create an Array. The reason for this is because arrays are immutable while
+                    arraylists are mutable. This means you are able to add items to an arraylist more easily than you are able to add items to
+                    an array. Explaining why is out of scope for this article, but I wanted to mention this will be less resource intensive.
+                </p>
+                <h3 class="text-center my-3">PowerShellMsiExec.psd1</h3>
+                <p>
+                    PowerShellMsiExec.psd1 is the PowerShell Module Manifest file. This is an optional file you can use when creating PowerShell 
+                    Modules instead of scripts. The Module Manifest contains additional information about the module. You can read more about 
+                    this here: 
+                    <a href="https://docs.microsoft.com/en-us/powershell/scripting/developer/module/how-to-write-a-powershell-module-manifest?view=powershell-7">https://docs.microsoft.com/en-us/powershell/scripting/developer/module/how-to-write-a-powershell-module-manifest?view=powershell-7. </a>
+                    The easiest way to get started with module manifests is to generate one using the New-ModuleManifest cmdlet and then populate 
+                    the data yourself.
+                </p>
+                <p>
+                    The most important settings here imho are RootModule and FunctionsToExport. See below:
+                </p>
+                <div class="d-flex justify-content-center container-fluid my-3">
+                    <image class="img-fluid" src="{{ url_for('static', filename='images/modules/psd1-rootmodule.png')}}"></image>
+                </div>
+                <div class="d-flex justify-content-center container-fluid my-3">
+                    <image class="img-fluid" src="{{ url_for('static', filename='images/modules/psd1-exported-functions.png')}}"></image>
+                </div>
+
+                <p>
+                </p>
+            </div>
+            <div>
+                <h2 class="text-center my-4">Controllers Directory</h2>
+                <p>
+                    <div class="directory-tree">
+                        Controllers\<br>
+                        <span class="ml-4">|-- Get-Logs.ps1</span><br>
+                        <span class="ml-4">|-- Install-Software.ps1</span><br><br>
+                    </div>
+                    The next files I am going to cover are in the Controllers Directory. They are Get-Logs.ps1 and Install-Software.ps1. These 
+                    are relatively simple files compared to the .psm1 file. They are simple PowerShell scripts that serve as wrappers for the 
+                    PowerShell module. I will explain potential use cases for this design and advantages of using it at the end of this tutorial.
+                </p>
+                <h3 class="text-center my-3">Install-Software.ps1</h3>
+                <div class="d-flex justify-content-center container-fluid my-3">
+                    <image class="img-fluid" src="{{ url_for('static', filename='images/scripts/ps1-install-software.png')}}"></image>
+                </div>
+                <p>
+                    Inside of the Install-Software.ps12 file there are just 9 lines of code. The first 7 contain a function named Controller. 
+                    First we store the path to .\PowerShellMsiExec in the <span class="posh-variable">$Path</span> variable by using 
+                    <span class="posh-variable">$MyInvocation.PSScriptRoot</span>. Next we import the module. Lastly, we call the 
+                    Install-Software function from the .psm1 file.
+                </p>
+                <h3 class="text-center my-3">Get-Logs.ps1</h3>
+                <div class="d-flex justify-content-center container-fluid my-3">
+                    <image class="img-fluid" src="{{ url_for('static', filename='images/scripts/ps1-get-logs.png')}}"></image>
+                </div>
+                <p>
+                    The Get-Logs.ps1 file is similar to the Install-Software file. The main difference here is that we are returning data and 
+                    will format for the user to view in the shell. We call the Controller function and store the result in the 
+                    <span class="posh-variable">$ResultArray</span> variable. We then iterate over the 
+                    <span class="posh-variable">$ResultArray</span> and write the data to the console.
+                </p>
+                <h2 class="text-center my-4">Batch Files</h2>
+                <p>
+                    The last two files I am going to cover in this tutorial are the batch files. They are Install-Software.bat and Get-logs.bat.
+                </p>
+                <div class="d-flex justify-content-center container-fluid my-3">
+                    <image class="img-fluid" src="{{ url_for('static', filename='images/scripts/bat-install-software.png')}}"></image>
+                </div>
+                <div class="d-flex justify-content-center container-fluid my-3">
+                    <image class="img-fluid" src="{{ url_for('static', filename='images/scripts/bat-get-logs.png')}}"></image>
+                </div>
+                <p>
+                    These batch files contain just four lines. The second line sets the path to the controller file and the third line executes the 
+                    code found at that path while temporarily bypassing the ExecutionPolicy. The ExecutionPolicy controls whether or not a machine 
+                    can run PowerShell code. You can read more about this here:
+                </p>
+                <h2 class="text-center my-4">Design Explained</h2>
+                <p>
+                    By default, Windows clients have this turned off, but more modern Windows servers have it turned on by default. I think this is 
+                    a pretty intelligent way to do things and think the use cases for allowing PowerShell scripts on clients are probably limited to 
+                    just helpdesk and other IT personnel. We can get around this by launching PowerShell.exe with a batch script as we are here.
+
+                    However, if you are comfortable changing the default PowerShell ExecutionPolicy on Windows clients to allow running scripts 
+                    (I would recommend using self-signed certificates if you want to enable this), you now have the flexibility to either launch
+                    the .ps1 files or to import the module itself. You can even create a PowerShell profile script to import the functions on 
+                    your machines automatically.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

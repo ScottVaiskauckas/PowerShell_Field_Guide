@@ -1,0 +1,70 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 25 %}
+
+{% block title %} Print-Files2 {% endblock %}
+
+{% block activecrumb %} Print-Files2 {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Making Reusable Code</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Code Example - Print-Files</h1>
+            <p>
+                This is the second code example in a series of lessons on making your code more reusable. If you have been following along, you now
+                have enough knowledge to start building tools that will solve real world problems. I am going to walk you through developing a script
+                to demonstrate how to apply the concepts from the previous lesson.
+            </p>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Functions:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">Developing a script</h2>
+            <p>
+                This is part 2 of a series of lessons where we develop a script to print pdf files in alphabetical order in a target directory. So far,
+                we have taken this script and used the Read-Host command to extend its functionality to multiple situations. We are going to take
+                what we started there and develop it further using what we now know about positional parameters.
+            </p>
+            <h2 class="text-center my-4">Where we left off</h2>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshPrintFiles1/Print-FilesRH.png') }}"></image><br>
+            </div>
+            <p>
+                We have a script where we are now accepting user input via the Read-Host cmdlet. This is a definite improvement over the initial
+                script with hardcoded values, but I think we can still make it better. Imagine you have run this script several hundred times.
+                You have now had to read the prompt from the Read-Host command two times that amount. One of the reasons to write scripts is to
+                make repetive things less tedious. It would be nice if we used positional parameters so that we can provide the values when we
+                call the script and bypass the Read-Host cmdlet.
+            </p>
+            <h2 class="text-center my-4">Positional Parameters</h2>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshPrintFiles2/Print-FilesPP.png') }}"></image><br>
+            </div>
+            <p>
+                I have made some significant changes to the script in this iteration. First, I am using two positional parameters to set the values
+                of the variables $ParentDirectory and $FileExt. Next, I have an if statement that tests to see if a value was provided for the first
+                positional parameter. If it is not, I am using the Read-Host cmdlet to get the input from the user. I don't really like prompting
+                for user input using the -prompt parameter. The Write-Host cmdlet provides more flexibility and additional features. You can use
+                Write-Host followed by Read-Host to let the user know what kind of input you are asking for.
+            </p>
+            <p>
+                Following this, I have a while statement which executes as long as $FileExt will evaulate to false. My reasoning here is that under
+                normal circumstances, pretty much any printable file will have a file extension. If you would like to print files without file extensions,
+                you can do this using the * wildcard, but you will end up printing all files in a directory.
+            </p>
+            <p>
+                Everything outside of this is exactly as it was in part 1. The error handling here is a little bit gratuitous, but I created it specfically
+                to demonstrate the strength of named parameters. When we return in part 3, we will be refactoring this script using named parameters.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

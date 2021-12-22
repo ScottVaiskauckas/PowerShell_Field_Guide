@@ -1,0 +1,68 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 1 %}
+
+{% block title %} Introduction {% endblock %}
+{% block activecrumb %} Introduction {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Introduction</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">Welcome to my lessons on PowerShell</h1>
+            <p>
+                My name is Scott and I not so long ago like you had decided to learn PowerShell. At the time I already
+                had some experience with Java and Python and was familiar with many commandline tools from working in
+                IT. When I was learning PowerShell, I found myself more or less Googling how I would do something I already
+                knew how to do in other lanugages or in cmd.exe, but with PowerShell. In the beginning, I thought it would 
+                be a way to make managing a large number of desktop computers simultaneously easy and really only wanted to 
+                learn enough to achieve my goals. Eventually, I started looking at PowerShell as a way to unify all of the
+                administrative tools I used in Windows under one administrative tool. Even better than that, it provided
+                a higher level of granularity in most cases than what you would be able to see through the GUI.
+            </p>
+            <h2 class="text-center my-4">Who this is for:</h2>
+            <p>
+                I have three target audience members in mind as I am writing this. The first are developers or people
+                who already know a programming language who would otherwise be Googling questions like "does PowerShell allow 
+                function overloading?" The second are administrators who come from a *nix background and may already be
+                comfortable with Bash and Python. The last group that I am writing this for are Windows admins who are pretty
+                comfortable using the commandline and who can create batch scripts, but may not have a programming background.
+            </p>
+            <p>
+                If you're not in one of these groups, you may still find some value here. I'm going to have examples that are
+                derivations of things I have actually used in the real world that made my bosses pleased. In many cases, you
+                can take these examples as starting points and hack them into something that will work for you. That won't
+                necessarily benefit you as much in the long run as actually learning why this stuff works the way it does,
+                but it is a way to get started using PowerShell.
+            </p>
+            <h2 class="text-center my-3">Teaching Philosophy</h2>
+            <p>
+                My teaching philosophy is to keep things short and to the point. Humans are hardly super-computers and the average person
+                can only stay focused for about 20 minutes at a time. I have tried to break these lessons up into bite-sized portions.
+                Rather than try to cover every single detail there is to know about one particular topic, I am going to give you enough
+                to get started using it right away. I am going to come back to certain topics later on and provide additional details
+                rather than give it to you all at once. I often will introduce a term by using it in context with minimal definition
+                only to deep-dive into it at a later point.
+            </p>
+            <p>
+                The reason I have designed these lessons this way is because this is the way I actually learned programming. I would hear
+                a term or see a code snippet that was an example of a concept and learn just enough to use it to solve a problem. Eventually
+                I would realize I understood how to use things, but not why I used them that way and would start to investigate further.
+                Some people seem able to just pick up a book on programming and start reading it chapter by chapter with each covering a
+                topic in great detail. If you're one of those people, this book may seem a bit circular to you.
+            </p>
+            <h2 class="text-center my-3">What am I going to get out of this?</h2>
+            <p>
+                By the end of this course, you should have an understanding of how to use PowerShell to do many tasks you would encounter
+                as a helpdesk technician or Windows SysAdmin. Not only this, but I will be showing you on way you can "manage herds, not 
+                pets" with tools that are freely included with Windows. You will also have been exposed to all of the material you would
+                encounter in a 101 level introduction to programming course, except from the perspective of using PowerShell. This is
+                something I haven't seen many other places - most seem to focus on scripting or using the shell.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

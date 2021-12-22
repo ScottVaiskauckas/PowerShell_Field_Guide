@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% set active_page = "learn" %}
+
+{% block title %} Learn - {% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item" aria-current="page">Home</li>
+{% endblock %}
+
+{% block content %} 
+<div class="card mx-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Lessons</h1>
+    </div>
+    <div class="card-body">
+        <div class="h4-div mb-3 text-center"><h4></h3></div>
+        <div class="row justify-content-md-center">
+            <div class="Tutorial-PowerShell col-4">
+                <h6>Part 1 - The Basics</h6>
+                <ul>
+                    <li><a href="{{ url_for('intro') }}">Introduction</a></li>
+                    <li><a href="{{ url_for('start') }}">Getting Started</a></li>
+                    <li><a href="{{ url_for('basics') }}">Lesson 1 - Basics</a></li>
+                    <li><a href="{{ url_for('datatypes') }}">Lesson 2 - Datatypes</a></li>
+                    <li><a href="{{ url_for('math') }}">Lesson 3 - Mathematical Operators</a></li>
+                    <li><a href="{{ url_for('comparison') }}">Lesson 4 - Comparison Operators</a></li>
+                    <li><a href="{{ url_for('variables') }}">Lesson 5 - Variables</a></li>
+                    <li><a href="{{ url_for('assignment') }}">Lesson 6 - Assignment Operators</a></li>
+                    <li><a href="{{ url_for('logical') }}">Lesson 7 - Logical Operators</a></li>
+                </ul>
+                <h6>Part 2 - Control Flow</h6>
+                <ul>
+                    <li><a href="{{ url_for('posh_if') }}">Lesson 8 - If</a></li>
+                    <li><a href="{{ url_for('posh_else') }}">Lesson 9 - Else</a></li>
+                    <li><a href="{{ url_for('nestedif') }}">Lesson 10 - NestedIf</a></li>
+                    <li><a href="{{ url_for('elseif') }}">Lesson 11 - ElseIf</a></li>
+                    <li><a href="{{ url_for('switch') }}">Lesson 12 - Switch</a></li>
+                    <li><a href="{{ url_for('posh_while') }}">Lesson 13 - While</a></li>
+                    <li><a href="{{ url_for('posh_for') }}">Lesson 14 - For</a></li>
+                </ul>
+                <h6>Part 3 - Collections</h6>
+                <ul>
+                    <li><a href="{{ url_for('arrays') }}">Lesson 15 - Arrays</a></li>
+                    <li><a href="{{ url_for('foreach') }}">Lesson 16 - Foreach</a></li>
+                    <li><a href="{{ url_for('lists') }}">Lesson 17 - Lists</a></li>
+                    <li><a href="{{ url_for('arraylists') }}">Lesson 18 - Arraylists</a></li>
+                    <li><a href="{{ url_for('hashtables') }}">Lesson 19 - Hashtables</a></li>
+                </ul>
+            </div>
+            <div class="Tutorial-PowerShell col-4">
+                <h6>Part 4 - Making Your Code Reusable</h6>
+                <ul>
+                    <li><a href="{{ url_for('readhost') }}">Lesson 20 - Read-Host</a></li>
+                    <li><a href="{{ url_for('printfiles1') }}">Print-Files - Part 1</a></li>
+                    <li><a href="{{ url_for('positional') }}">Lesson 21 - Positional Parameters</a></li>
+                    <li><a href="{{ url_for('printfiles2') }}">Print-Files - Part 2</a></li>
+                    <li><a href="{{ url_for('namedparams') }}">Lesson 22 - Named Parameters</a></li>
+                    <li><a href="{{ url_for('printfiles3') }}">Print-Files - Part 3</a></li>
+                    <li><a href="{{ url_for('functions') }}">Lesson 23 - Functions</a></li>
+                    <li><a href="{{ url_for('classes') }}">Lesson 24 - Classes</a></li>
+                </ul>
+                <h6>Part 5 - Solving Problems With PowerShell</h6>
+                <ul>
+                    <li><a href="{{ url_for('persistance') }}">Persistance with PowerShell</a></li>
+                    <li><a href="{{ url_for('txt') }}">Storing state with txt files</a></li>
+                    <li><a href="{{ url_for('csv') }}">Storing state with csv files</a></li>
+                    <li><a href="{{ url_for('xml') }}">Storing state with xml files</a></li>
+                    <li><a href="{{ url_for('msiexec') }}">Code Example - Installing software with MsiExec</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

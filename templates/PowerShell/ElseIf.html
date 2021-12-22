@@ -1,0 +1,74 @@
+{% extends "PowerShell/PoshBase.html" %}
+{% set active_page = "learn" %}
+{% set page_number = 13 %}
+
+{% block title %} ElseIf {% endblock %}
+
+{% block activecrumb %} ElseIf {% endblock %}
+
+{% block content %} 
+<div class="content-card card mx-5 mb-5">
+    <div class="card-header text-center bg-dark text-light">
+        <h1 class="display-4">Control Flow</h1>
+    </div>
+    <div class="card-body justify-content-center">
+        <div>
+            <h1 class="text-center my-4">PowerShell ElseIf</h1>
+            <h2 class="text-center my-4">Before you begin: </h2>
+            <p>
+                In this lesson, we will be using PowerShell files you can find in the following github repo in a folder named 
+                PowerShell_Control_Flow:
+                <a href="https://github.com/ScottVaiskauckas/PowerShell">https://github.com/ScottVaiskauckas/PowerShell</a>.
+                If you have never used Github before, for full instructions on how to download this file, please see my page on 
+                <a href="{{ url_for('intro') }}">Getting Started</a>.
+            </p>
+            <h2 class="text-center my-4">Nested If statements revisited</h2>
+            <p>
+                In our last lesson, we discussed how nested if statements can lead to very difficult to read code. 
+                In this lesson, I am going to show you how to use the ElseIf keyword in PowerShell so you can avoid
+                nested if statements.
+            </p>
+            <h5 class="text-center my-4">Example 1</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshNestedIf/NestedIf-Example1.png') }}"></image><br>
+            </div>
+            <p>
+                The above code is from our first example in the last lesson. I have refactored the code using the ElseIf statement below to
+                demonstrate how much easier it is to read than using nested if statements.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshElseIf/ElseIf-Example1.png') }}"></image><br>
+            </div>
+            <p>
+                Here, we once again start by initializing our $Condition1 and $Condition2 variables and assigning them the values $False and 
+                $True. Next we have our first conditional statement on line 5. Since $Condition1 is false, we skip over our first code block
+                and move to our ElseIf statement. Here, we have test $Condition2 which evaluates to $True. We execute the code
+                block following the ElseIf statement. Since the ElseIf statement is true, the code block following the Else statement never 
+                executes.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshElseIf/ElseIf-Example1-Flowchart.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshElseIf/ElseIf-Example1-Result.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Example 2</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshNestedIf/NestedIf-Example2.png') }}"></image><br>
+            </div>
+            <p>
+                For example 2, I have refactored the code from example 2 in the last lesson. Look at how much easier it is to read now that we
+                are using ElseIf instead of all those nested If statements.
+            </p>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshElseIf/ElseIf-Example2.png') }}"></image><br>
+            </div>
+            <h5 class="text-center my-4">Output:</h5>
+            <div class="d-flex justify-content-center container-fluid my-3">
+                <image class="border img-fluid" src="{{ url_for('static', filename='images/PowerShell/PoshElseIf/ElseIf-Example2-Result.png') }}"></image><br>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
